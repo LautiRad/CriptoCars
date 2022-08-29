@@ -126,7 +126,7 @@ export default function Formulario() {
 							/>
 							<ErrorMessage name="marca" component={() => (<div className={styles.error}>{errors.marca}</div>)} />
 						</div>
-                        <div>}
+                        <div>
 							<label htmlFor="description">Breve Descripción: </label>
 							<Field
 								type="text" 
