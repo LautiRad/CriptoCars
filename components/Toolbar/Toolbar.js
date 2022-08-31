@@ -3,6 +3,8 @@ import styles from '../../styles/Home.module.css'
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import Image from 'next/image';
+import imgHero from "../../public/images/hero/hero.png"
 
 
 
@@ -50,6 +52,11 @@ function Toolbar() {
 
     return(
     <div className={styles.toolbar}>
+      <Image src={imgHero}
+            layout="fill"
+            objectFit="contain"
+            quality={100} 
+            alt="imgHero"/>
         <div className={styles.hero}>
         <h1 className={styles.title}>Comprá tu auto de forma segura con criptomonedas.</h1>
         
