@@ -13,10 +13,21 @@
 }
 
 .toolbar {
-  background: linear-gradient(270deg, #ED1848 0%, #78314D 100%);
+  background-image: url("../public/images/hero/hero.png");
   z-index: 1;
   opacity: 100%;
+  height: 500px;
+  width: auto;
+  color: white;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
 }
+
+.toolbar H1 {
+  font-size: 36px;
+}
+
 
 .footer {
   display: flex;
