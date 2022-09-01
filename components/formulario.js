@@ -1,30 +1,50 @@
 import React, { useState } from "react";
 import { Formik, Field, ErrorMessage } from "formik";
+import axios from "axios";
 import styles from "../styles/Home.module.css";
 
 export default function Formulario() {
   const [formSend, setFormSend] = useState(false);
 
-  const postForm = async (values) => {
-    const options = {
-      method: "POST",
-      headers: {
-        Authorization: "",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ values }),
-    };
+  // const postForm = async (values) => {
+  //   const options = {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization:
+  //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYyMDU5Nzc0LCJleHAiOjE2NjI2NjQ1NzR9.4nQNTOISXVSM54C1no7XD8-aEV47PayLzLQ5Lz3zjbs",
+  //       "Content-Type": "application/json",
+  //     },
+  //     data: values,
+  //   };
 
-    return fetch("https://criptocars-api.herokuapp.com/api/v1/post", options)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res?.status === 200) {
-          return res;
-        }
-        throw new Error("Network response was not ok");
-      })
+  //   return fetch("https://criptocar-api.azurewebsites.net/api/v1/post", options)
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       if (res?.status === 200) {
+  //         return res;
+  //       }
+  //       throw new Error("Network response was not ok");
+  //     })
 
-      .catch((err) => console.log("ERROR", err));
+  //     .catch((err) => console.log("ERROR", err));
+  // };
+
+  const sendData = async (data) => {
+    try {
+      const post = await axios({
+        method: "post",
+        url: "https://criptocar-api.azurewebsites.net/api/v1/post",
+        data: data,
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYyMDU5Nzc0LCJleHAiOjE2NjI2NjQ1NzR9.4nQNTOISXVSM54C1no7XD8-aEV47PayLzLQ5Lz3zjbs",
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(post, "se envio");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const initialValues = {
@@ -114,6 +134,7 @@ export default function Formulario() {
       },
     };
     console.log("Formulario enviado", data);
+    sendData(data);
     setFormSend(true);
     setTimeout(() => setFormSend(false), 5000);
   };
