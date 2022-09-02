@@ -65,6 +65,7 @@
 
 .description {
   margin: 4rem 0;
+  padding: 1rem;
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -83,7 +84,6 @@
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  max-width: 90%;
 }
 
 .card {
@@ -121,29 +121,9 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
-  }
-}
-
 .card_form {
   display: grid;
-  margin: 1rem;
+  /* margin: 1rem; */
   padding: 1.5rem;
   text-align: left;
   color: ligthgray;
@@ -225,7 +205,7 @@
 /* Formulario2 */
 
 .formulario {
-  min-width: 600px;
+  /* min-width: 600px; */
   margin-top: 50px;
   background: #000000;
   border-radius: 5px;
@@ -251,7 +231,7 @@
   width: 100%;
   border-radius: 5px;
   border: 2px solid #000000;
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px;
   margin-bottom: 5px;
   color: #444;
@@ -296,4 +276,28 @@
 
 .formulario input[type="radio"] {
   width: auto;
+}
+
+@media (min-width: 600px) {
+  .formulario {
+    min-width: 600px;
+  }
+
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+  .logo img {
+    filter: invert(1);
+  }
 }
