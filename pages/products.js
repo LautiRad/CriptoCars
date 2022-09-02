@@ -66,18 +66,6 @@ export default function Products() {
           <link rel="icon" href="/icon.ico" />
         </Head>
         <ResponsiveAppBar/>
-        <div className={styles.card_product}>
-          <Image src={AutitoProd} className={styles.autitoimg} alt="autito-img" />
-          <p>Fiat 500</p>{/* <p>{element.name}</p> */}
-          <p>1.4 Cult 8v. Nafta. 2P Automático</p>{/* <p>{element.description}</p> */}
-          <p>2015</p>{/* <p>{element.model}</p> */}
-          <p>102.300 km</p>{/* <p>{element.km}</p> */}
-          <p><Image src={iconUSDT} alt="LogoUSDT" />$5300</p>{/* <p><Image src={iconUSDT} />${element.price}</p> */}
-          <p>Vicente López, Provincia de Buenos Aires.</p>{/* <p>{element.ubication}</p> */}
-          <Link href="/products">
-            <Button variant="contained">Comprar</Button>
-          </Link>
-        </div>
         <ProductCard />
           <div className={styles.container}>
             <footer className={styles.footer}>
