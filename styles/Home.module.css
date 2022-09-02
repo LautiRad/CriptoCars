@@ -263,6 +263,7 @@
 }
 
 .formulario .error {
+  padding-left: 16px;
   color: #e92b2d;
   font-weight: 600;
   font-size: 12px;
