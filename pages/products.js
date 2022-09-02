@@ -9,7 +9,7 @@ import AutitoProd from '../public/images/autitoProd.png'
 import iconUSDT from '../public/images/iconUSDT.png'
 import Button from '@mui/material/Button'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import ProductCard from '../components/Articles/Articles'
+import ProductCard from '../components/Articles/ProductCard'
 
 export default function Products() {
   const theme = createTheme({
