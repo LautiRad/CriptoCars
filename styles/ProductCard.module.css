@@ -1,0 +1,6 @@
+.container {
+    width: 330px;
+    height: 500px;
+    outline: green solid 1px;
+    border-radius: 10px;
+}
