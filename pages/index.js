@@ -7,7 +7,7 @@ import DestArticles from '../components/DestArticles/DestArticles'
 import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 import styles from '../styles/Home.module.css'
-import Logo from '../public/images/full.png';
+import LogoNegro from '../public/images/fullNegro.png';
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
         <div className={styles.container}>
           <footer className={styles.footer}>
             <a href="https://www.instagram.com/criptocars/" target="_blank" rel="noopener noreferrer">
-            <Image src={Logo} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+            <Image src={LogoNegro} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
             </a>
           </footer>
         </div>
