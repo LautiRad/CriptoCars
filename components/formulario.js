@@ -26,6 +26,14 @@ export default function Formulario() {
     }
   };
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
   const initialValues = {
     nameCar: "",
     description: "",
@@ -34,7 +42,7 @@ export default function Formulario() {
     price: "",
     ubication: "",
     email: "",
-    image: "",
+    urlimagepost: "",
     message: "",
   };
 
@@ -67,18 +75,7 @@ export default function Formulario() {
       .min(10, "Descripción muy corta!")
       .max(60, "Descripción muy larga")
       .required("Campo requerido"),
-    image: Yup.mixed()
-      .required("Campo requerido")
-      .test(
-        "FILE_SIZE",
-        "Muy grande la imagen",
-        (value) => value && value.size < 1024 * 1024
-      )
-      .test(
-        "FILE_TYPE",
-        "Invalido",
-        (value) => value && ["image/png", "image/jpeg"].includes(value.type)
-      ),
+    urlimagepost: Yup.string().required("Campo requerido"),
     message: Yup.string()
       .min(10, "Descripción muy corta!")
       .max(60, "Descripción muy larga")
@@ -94,7 +91,7 @@ export default function Formulario() {
       price: value.price,
       ubication: value.ubication,
       email: value.email,
-      image: value.image,
+      urlimagepost: value.urlimagepost,
       message: value.message,
     };
     console.log("Formulario enviado", data);
@@ -182,19 +179,21 @@ export default function Formulario() {
               ) : null}
             </div>
             <div>
-              <label htmlFor="img">Imagen: </label>
+              <label htmlFor="urlimagepost">Imagen: </label>
               <input
                 type="file"
-                id="img"
-                name="image"
+                id="urlimagepost"
+                name="urlimagepost"
                 accept="image/*"
-                onChange={(event) => {
+                onChange={async (event) => {
                   setPrevImg(event.currentTarget.files[0]);
-                  setFieldValue("image", event.currentTarget.files[0]);
+                  const img = await toBase64(event.currentTarget.files[0]);
+                  console.log(img);
+                  setFieldValue("urlimagepost", img);
                 }}
               />
-              {errors.image && touched.image ? (
-                <div className={styles.error}>{errors.image}</div>
+              {errors.urlimagepost && touched.urlimagepost ? (
+                <div className={styles.error}>{errors.urlimagepost}</div>
               ) : null}
               {PrevImg != null && <PreviewImage file={PrevImg} />}
             </div>
