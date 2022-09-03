@@ -5,7 +5,7 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Image from 'next/image';
 import imgHero from "../../public/images/hero/hero.png"
-
+import bg from './overlayLauti.png'
 
 
 function Toolbar() {
@@ -51,10 +51,6 @@ function Toolbar() {
 
     return(
     <div className={styles.toolbar}>
-      <Image src={imgHero}
-            layout="fill"
-            objectFit="contain"
-            alt="imgHero"/>
         <div className={styles.hero}>
         <h1 className={styles.title}>Comprá tu auto de forma segura con criptomonedas.</h1>
         <br/>
@@ -68,10 +64,6 @@ function Toolbar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          
-          <p className={styles.description}>
-            Utilizamos como medio de pago, el Escrow de paydece.io para brindarte una mayor seguridad
-          </p>
         </div>
     </div>
     );

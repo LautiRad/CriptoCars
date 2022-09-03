@@ -6,38 +6,15 @@ import styles from "../styles/Home.module.css";
 export default function Formulario() {
   const [formSend, setFormSend] = useState(false);
 
-  // const postForm = async (values) => {
-  //   const options = {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization:
-  //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYyMDU5Nzc0LCJleHAiOjE2NjI2NjQ1NzR9.4nQNTOISXVSM54C1no7XD8-aEV47PayLzLQ5Lz3zjbs",
-  //       "Content-Type": "application/json",
-  //     },
-  //     data: values,
-  //   };
-
-  //   return fetch("https://criptocar-api.azurewebsites.net/api/v1/post", options)
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       if (res?.status === 200) {
-  //         return res;
-  //       }
-  //       throw new Error("Network response was not ok");
-  //     })
-
-  //     .catch((err) => console.log("ERROR", err));
-  // };
-
   const sendData = async (data) => {
     try {
       const post = await axios({
         method: "post",
-        url: "https://criptocar-api.azurewebsites.net/api/v1/post",
+        url: "URL_POST",
         data: data,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYyMDU5Nzc0LCJleHAiOjE2NjI2NjQ1NzR9.4nQNTOISXVSM54C1no7XD8-aEV47PayLzLQ5Lz3zjbs",
+            "TOKEN_POST",
           "Content-Type": "application/json",
         },
       });

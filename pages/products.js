@@ -9,6 +9,7 @@ import AutitoProd from '../public/images/autitoProd.png'
 import iconUSDT from '../public/images/iconUSDT.png'
 import Button from '@mui/material/Button'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import ProductCard from '../components/Articles/ProductCard'
 
 export default function Products() {
   const theme = createTheme({
@@ -25,9 +26,9 @@ export default function Products() {
   
   const [data, setData] = useState(null)
 
-  /*const fetchProducts = async() => {
+  const fetchProducts = async() => {
     let myHeaders = new Headers({
-      'Authorization': '', 
+      'Authorization': 'TOKEN_GET', 
       'Content-Type': 'application/json'
   });
     
@@ -38,7 +39,7 @@ export default function Products() {
     };
   
     const res = await fetch(
-      'https://criptocars-api.herokuapp.com/api/v1/post',
+      'URL_GET',
       requestOptions,
     )
       .then(response => response.json())
@@ -55,7 +56,6 @@ export default function Products() {
     },[])
 
   console.log(data);
-  */
     return (
       <ThemeProvider theme={theme}>
         <div>
@@ -65,18 +65,11 @@ export default function Products() {
           <link rel="icon" href="/icon.ico" />
         </Head>
         <AppBarCC/>
-        <div className={styles.card_product}>
-                    <Image src={AutitoProd} className={styles.autitoimg} alt="autito-img" />
-                    <p>Fiat 500</p>{/* <p>{element.name}</p> */}
-                    <p>1.4 Cult 8v. Nafta. 2P Automático</p>{/* <p>{element.description}</p> */}
-                    <p>2015</p>{/* <p>{element.model}</p> */}
-                    <p>102.300 km</p>{/* <p>{element.km}</p> */}
-                    <p><Image src={iconUSDT} alt="LogoUSDT" />$5300</p>{/* <p><Image src={iconUSDT} />${element.price}</p> */}
-                    <p>Vicente López, Provincia de Buenos Aires.</p>{/* <p>{element.ubication}</p> */}
-                    <Link href="/products">
-                      <Button variant="contained">Comprar</Button>
-                    </Link>
-        </div>
+        {data && data.map((element)=>{
+                  return(
+        <ProductCard />
+        )
+      })} 
           <div className={styles.container}>
             <footer className={styles.footer}>
               <Link href="https://www.instagram.com/criptocars/"><a target="_blank" rel="noopener noreferrer">

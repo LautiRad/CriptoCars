@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import ResponsiveAppBar from '../components/ResponsiveAppBar/ResponsiveAppBar'
 import AppBarCC from '../components/ResponsiveAppBar/AppBarCC'
 import Toolbar from '../components/Toolbar/Toolbar'
 import Categories from '../components/Categories/Categories'
@@ -10,7 +9,7 @@ import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 import styles from '../styles/Home.module.css'
 import Logo from '../public/images/full.png';
 /**
-      <Toolbar/> */
+       */
 
 export default function Home() {
   return (
@@ -20,8 +19,8 @@ export default function Home() {
         <meta name="description" content="Versión beta de criptocars" />
         <link rel="icon" href="/icon.png" />
       </Head>
-      <ResponsiveAppBar/>
-      <AppBarCC/>
+      <AppBarCC/>      
+      <Toolbar/>
       <Categories/>
       <DestArticles/>
       
