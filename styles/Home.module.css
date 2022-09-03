@@ -162,7 +162,7 @@
 .cards {
   align-items: center;
   justify-content: center;
-  display: flow;
+  display: flex;
   gap: 35px;
 }
 
@@ -288,7 +288,7 @@
 
   .grid {
     width: 100%;
-    flex-direction: column;
+    flex-direction: files;
   }
 }
 

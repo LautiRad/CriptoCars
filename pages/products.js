@@ -28,8 +28,9 @@ export default function Products() {
 
   const fetchProducts = async() => {
     let myHeaders = new Headers({
-      'Authorization': 'TOKEN_GET', 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYyMDU5NDU3LCJleHAiOjE2NjI2NjQyNTd9.HMTPnA0QuAQNXBHnUhiADOQzhFKwH11R738h1SOM8Zo'
+      
   });
     
   
@@ -39,7 +40,7 @@ export default function Products() {
     };
   
     const res = await fetch(
-      'URL_GET',
+      'URL_GET', 'https://criptocar-api.azurewebsites.net/api/v1/post',
       requestOptions,
     )
       .then(response => response.json())
@@ -65,11 +66,79 @@ export default function Products() {
           <link rel="icon" href="/icon.ico" />
         </Head>
         <AppBarCC/>
+        
+        <ProductCard/>
+        <div className={styles.grid}>
         {data && data.map((element)=>{
-                  return(
-        <ProductCard />
-        )
+                  return (
+                    <div key={element} className={styles.containerC}>
+                      <div className={styles.imagewrapperC}>
+                        <Image
+                          className={styles.imageC}
+                          src={AutitoProd}
+                          alt="Autito"
+                        />
+                      </div>
+                      <div className={styles.contentC}>
+                        <div className={styles.titlewrapperC}>
+                          <div className={styles.leftC}>
+                            <Image
+                              className={styles.iconC}
+                              src={iconTool}
+                              alt="icon tool"
+                            />
+                            <div className={styles.productnameC}>
+                              <p>Fiat 500</p>
+                              <p>{element.name}</p> */
+                            </div>
+                          </div>
+                          <Image
+                            className={styles.iconC}
+                            src={Heart}
+                            alt="icon heart"
+                          />
+                        </div>
+                        <div className={styles.descriptionC}>
+                          <p className={styles.descriptiontextC}>
+                            1.4 Cult 8v. Nafta. 2P Automático
+                          </p>
+                          <p>{element.descriptionC}</p> */
+                        </div>
+                        <div className={styles.priceC}>
+                          <Image
+                            className={styles.iconusdtC}
+                            src={iconUSDT}
+                            alt="icon usdt"
+                          />
+                          <p className={styles.pricecurrencyC}>USDT</p>
+                          <p className={styles.priceamountC}>5.000</p>
+                          <p>{element.price}</p>
+                        </div>
+                        <div className={styles.specificationsC}>
+                          <p className={styles.specificationyearC}>2012</p>{" "}
+                          <p>{element.year}</p>
+                          <p className={styles.specificationdistanceC}>
+                            92.000 km
+                          </p>{" "}
+                          <p>{element.distance}</p> */
+                        </div>
+                        <div className={styles.locationC}>
+                          <Image
+                            src={MapMaker}
+                            className={styles.locationiconC}
+                            alt="map marker icon"
+                          />
+                          <p className={styles.locationtextC}>
+                            Buenos Aires, Argentina
+                          </p>{" "}
+                          <p>{element.ubication}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
       })} 
+        </div>
+        
           <div className={styles.container}>
             <footer className={styles.footer}>
               <Link href="https://www.instagram.com/criptocars/"><a target="_blank" rel="noopener noreferrer">
