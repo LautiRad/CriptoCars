@@ -50,11 +50,16 @@ function Toolbar() {
   }));
 
     return(
+      
     <div className={styles.toolbar}>
+    
         <div className={styles.hero}>
-        <h1 className={styles.title}>Comprá tu auto de forma segura con criptomonedas.</h1>
-        <br/>
-        {/* SearchBar */}
+        <div>
+          <Image src={bg} alt="bg" responsive width={1640}/>
+          
+        </div>
+        <div className={styles.heroContent}>
+        <h1>Comprá tu auto de forma segura con criptomonedas.</h1>
         <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -64,6 +69,7 @@ function Toolbar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          </div>
         </div>
     </div>
     );

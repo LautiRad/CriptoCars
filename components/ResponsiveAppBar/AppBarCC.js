@@ -39,15 +39,11 @@ const pages = [
 
 const AppBarCC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [reedirigir, setReedirigir] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     console.log("ay me tocaste ahi abajo")
     setAnchorElNav(event.currentTarget);
   };
-  //  const handleOpenUserMenu = (event) => {
-  //    setAnchorElUser(event.currentTarget);
-  //  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -125,9 +121,6 @@ const AppBarCC = () => {
                 sx={{ display: { xs: "none", md: "flex" } }}
               />
             </Link>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            
-            </Box>
             <Typography
               variant="h5"
               noWrap
@@ -144,18 +137,20 @@ const AppBarCC = () => {
                 textDecoration: "none",
               }}
             ></Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page, index) => (
                 <Button
                   key={index}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                 <Typography textAlign="center" onClick={()=>redirect(page.url)}>
+                <Typography textAlign="center" onClick={()=>redirect(page.url)}>
                         {page.name}
                       
-                 </Typography>
+                      </Typography>
                 </Button>
               ))}
+            </Box>
 
             <Box sx={{ flexGrow: 0 }}></Box>
             <Rainbow />

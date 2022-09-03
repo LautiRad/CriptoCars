@@ -8,8 +8,6 @@ import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 import styles from '../styles/Home.module.css'
 import Logo from '../public/images/full.png';
-/**
-       */
 
 export default function Home() {
   return (
