@@ -11,8 +11,7 @@
 }
 
 .toolbar {
-  z-index: 1;
-  opacity: 100%;
+  margin-top: 0;
   height: 500px;
   width: auto;
   color: white;

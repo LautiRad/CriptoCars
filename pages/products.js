@@ -1,5 +1,5 @@
 import React , {useState , useEffect} from 'react'
-import ResponsiveAppBar from '../components/ResponsiveAppBar/ResponsiveAppBar'
+import AppBarCC from '../components/ResponsiveAppBar/AppBarCC'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
@@ -64,7 +64,7 @@ export default function Products() {
           <meta name="description" content="Versión beta de criptocars" />
           <link rel="icon" href="/icon.ico" />
         </Head>
-        <ResponsiveAppBar/>
+        <AppBarCC/>
         <div className={styles.card_product}>
                     <Image src={AutitoProd} className={styles.autitoimg} alt="autito-img" />
                     <p>Fiat 500</p>{/* <p>{element.name}</p> */}

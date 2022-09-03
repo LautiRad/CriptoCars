@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import ResponsiveAppBar from '../components/ResponsiveAppBar/ResponsiveAppBar'
+import AppBarCC from '../components/ResponsiveAppBar/AppBarCC'
 import Toolbar from '../components/Toolbar/Toolbar'
 import Categories from '../components/Categories/Categories'
 import DestArticles from '../components/DestArticles/DestArticles'
@@ -8,7 +9,8 @@ import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 import styles from '../styles/Home.module.css'
 import Logo from '../public/images/full.png';
-
+/**
+      <Toolbar/> */
 
 export default function Home() {
   return (
@@ -19,7 +21,7 @@ export default function Home() {
         <link rel="icon" href="/icon.png" />
       </Head>
       <ResponsiveAppBar/>
-      <Toolbar/>
+      <AppBarCC/>
       <Categories/>
       <DestArticles/>
       

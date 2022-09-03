@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from 'react'
-import ResponsiveAppBar from '../components/ResponsiveAppBar/ResponsiveAppBar'
+import AppBarCC from '../components/ResponsiveAppBar/AppBarCC'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Logo from '../public/images/full.png'
@@ -16,7 +16,7 @@ export default function Sell() {
           <meta name="description" content="Versión beta de criptocars" />
           <link rel="icon" href="/icon.png" />
         </Head>
-        <ResponsiveAppBar/>
+        <AppBarCC/>
         <div>
           <p className={styles.description}>
             Para publicar tu vehículo en criptocars tendrás que completar y enviar el siguiente formulario.
