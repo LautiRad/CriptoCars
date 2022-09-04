@@ -9,7 +9,7 @@ export default function Formulario() {
   const [formSend, setFormSend] = useState(false);
   const [PrevImg, setPrevImg] = useState(null);
 
-  const sendData = async (data) => {
+  const sendData = async ({ data }) => {
     try {
       const post = await axios({
         method: "post",
