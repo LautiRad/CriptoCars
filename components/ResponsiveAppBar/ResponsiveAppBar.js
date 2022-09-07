@@ -43,7 +43,7 @@ const ResponsiveAppBar = () => {
           <Link href="/" rel="noopener noreferrer">
             <Image src={Logo} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }}}/>
           </Link>
-        
+          
           <Typography
             variant="h6"
             noWrap

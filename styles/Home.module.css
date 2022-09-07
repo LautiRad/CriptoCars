@@ -206,11 +206,19 @@
 
 /* Formulario */
 
+.sell_form {
+background-color: white;
+border-radius: 10px;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
 .formulario {
   /* min-width: 600px; */
   margin-top: 50px;
-  background: #000000;
-  border-radius: 5px;
+  color: black;
+  background: white;
+  border-radius: 10px;
   padding: 20px;
   box-shadow: rgba(255, 255, 255, 0.16) 0px 1px 4px;
 }
@@ -221,19 +229,19 @@
 
 .formulario label {
   display: block;
-  font-weight: 600;
+  font-weight: normal;
   font-size: 14px;
   margin-bottom: 5px;
-  color: #fff;
+  color: black;
 }
 
 .formulario input,
 .formulario textarea {
   font-family: "Open Sans", sans-serif;
   width: 100%;
-  border-radius: 5px;
-  border: 2px solid #000000;
-  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  font-size: 14px;
   padding: 10px;
   margin-bottom: 5px;
   color: #444;
@@ -241,7 +249,7 @@
 
 .formulario input:focus {
   outline: none;
-  border: 2px solid #ffffff;
+  border: 1px solid #e92b2d;
 }
 
 .formulario .error {
@@ -259,7 +267,7 @@
   cursor: pointer;
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   color: #fff;
   font-size: 16px;
   transition: 0.3s ease all;
