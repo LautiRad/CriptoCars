@@ -17,21 +17,27 @@ export default function Sell() {
           <link rel="icon" href="/icon.png" />
         </Head>
         <AppBarCC/>
-        <div>
-          <p className={styles.description}>
-            Para publicar tu vehículo en criptocars tendrás que completar y enviar el siguiente formulario.
-          </p>
-          <p className={styles.description}>
-            Tené en cuenta dejar tu mail de contacto de manera correcta asi nos podemos contactar con vos.
-          </p>
-        </div>
+        <br></br>
 
+        
         <div className={styles.grid}>
+        <div className={styles.sell_form}>
           <a className={styles.card_form}>
             <h2>Formulario de Venta</h2>
-            <p>Completa el siguiente formulario para poder publicar tu vehículo, si todo está en orden nos comunicaremos con vós y procederemos a publicar tu vehículo.</p>
+              <br/>
+              <p>
+              Para publicar tu vehículo en criptocars tendrás que completar y enviar el siguiente formulario.
+              </p>
+              <br/>
+              <p>
+              Tené en cuenta dejar tu mail de contacto de manera correcta asi nos podemos contactar con vos.
+              </p>
+              <br/>
+              <p>Completa el siguiente formulario para poder publicar tu vehículo, si todo está en orden nos comunicaremos con vós y procederemos a publicar tu vehículo.
+              </p>
             <Formulario/>
           </a>
+        </div>
         </div>
         
 
