@@ -172,13 +172,13 @@
 .HowOperate {
   text-align: center;
   margin: 30px;
-  width: 500px;
+  width: 400px;
 }
 
 .HowOperateGrid { 
   display: flex;
   justify-content: space-between;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 .redHowOperate{
   font-size: 1.5rem ;
