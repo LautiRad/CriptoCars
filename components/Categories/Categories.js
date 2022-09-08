@@ -26,7 +26,7 @@ function Categories() {
         <ThemeProvider theme={theme}>
         <div className={styles.main}>
             <div>
-                <h1 className={styles.titleCate}>Catálogo</h1>
+                <h1 className={styles.title}>Catálogo</h1>
                 <Button variant="contained" href="/products">Ver Vehiculos Disponibles</Button>
             </div>
             
