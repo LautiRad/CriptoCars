@@ -25,15 +25,14 @@ function DestArticles() {
   });
     return (
       <ThemeProvider theme={theme}>
+        
         <div className={styles.DestArticles}>
-          <div className={styles}>
-            <h1 className={styles.title}>Artículos Destacados</h1>
-            <div className={styles.DestBtn}>
-              <Button variant="contained" href="/products">
-                Proximamente..
-              </Button>
-            </div>
+          
+          <div className={styles.tabs}>
+            <h1 className={styles}>Artículos Destacados</h1>
+            <Button variant="contained" href="/products">Ver todos</Button> 
           </div>
+
           <div className={styles.grid}>
             
             
@@ -52,7 +51,6 @@ function DestArticles() {
                     <div className={styles.leftC}>
                       <div className={styles.productnameC}>
                       <h4>Chevrolet S10</h4>
-                        {/* <p>{element.name}</p> */}
                       </div>
                     </div>
                   </div>
@@ -60,7 +58,6 @@ function DestArticles() {
                     <p className={styles.descriptiontextC}>
                     2.8 LS 4x4 CD 16V Turbo Diesel 4P Manual.
                     </p>
-                    {/* <p>{element.description}</p> */}
                   </div>
                   <div className={styles.priceC}>
                     <Image
@@ -70,15 +67,12 @@ function DestArticles() {
                     />
                     <p className={styles.pricecurrencyC}>USDT</p>
                     <p className={styles.priceamountC}>$18.000</p>
-                    {/* <p>{element.price}</p> */}
                   </div>
                   <div className={styles.specificationsC}>
                     <p className={styles.specificationyearC}>2021</p>{" "}
-                    {/* <p>{element.year}</p> */}
                     <p className={styles.specificationdistanceC}>
                       50.000 km
                     </p>{" "}
-                    {/* <p>{element.distance}</p> */}
                   </div>
                   <div className={styles.locationC}>
                     <Image
@@ -89,7 +83,6 @@ function DestArticles() {
                     <p className={styles.locationtextC}>
                       Santa Cruz, Argentina
                     </p>{" "}
-                    {/* <p>{element.ubication}</p> */}
                   </div>
                 </div>
               </div>
@@ -111,7 +104,6 @@ function DestArticles() {
                     <div className={styles.leftC}>
                       <div className={styles.productnameC}>
                       <h4 className="Subtitle">Toyota Hilux</h4>
-                        {/* <p>{element.name}</p> */}
                       </div>
                     </div>
                   </div>
@@ -119,7 +111,6 @@ function DestArticles() {
                     <p className={styles.descriptiontextC}>
                       2.8 STD 4x4 CD Diesel 4P Manual.
                     </p>
-                    {/* <p>{element.description}</p> */}
                   </div>
                   <div className={styles.priceC}>
                     <Image
@@ -129,15 +120,12 @@ function DestArticles() {
                     />
                     <p className={styles.pricecurrencyC}>USDT</p>
                     <p className={styles.priceamountC}>21.000</p>
-                    {/* <p>{element.price}</p> */}
                   </div>
                   <div className={styles.specificationsC}>
                     <p className={styles.specificationyearC}>2020</p>{" "}
-                    {/* <p>{element.year}</p> */}
                     <p className={styles.specificationdistanceC}>
                       24.000 km
                     </p>{" "}
-                    {/* <p>{element.distance}</p> */}
                   </div>
                   <div className={styles.locationC}>
                     <Image
@@ -148,13 +136,13 @@ function DestArticles() {
                     <p className={styles.locationtextC}>
                       Buenos Aires, Argentina
                     </p>{" "}
-                    {/* <p>{element.ubication}</p> */}
                   </div>
                 </div>
               </div>
             </a>
           </Link>
           </div>
+          
         </div>
       </ThemeProvider>
     );
