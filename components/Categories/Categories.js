@@ -25,38 +25,38 @@ function Categories() {
     return (
         <ThemeProvider theme={theme}>
         <div className={styles.main}>
-            <div>
+            <div className={styles.tabs}>
                 <h1 className={styles.title}>Catálogo</h1>
-                <Button variant="contained" href="/products">Ver Vehiculos Disponibles</Button>
+                <Button variant="contained" href="/products">Ver todos</Button>
             </div>
             
             <div className={styles.grid}>
             <Link href="/products">
-                <a className={styles.card}>
+                <div className={styles.card}>
+                    <Image src={vehiculo1} objectFit="cover" alt="vehiculo-img" />
                     <h2>Pick Up</h2>
-                    <Image src={vehiculo1} className="vehiculo-img" alt="vehiculo-img" />
-                </a>
+                </div>
             </Link>
 
             <Link href="/products">
-                <a className={styles.card}>
+                <div className={styles.card}>
+                    <Image src={vehiculo4} objectFit="cover" alt="vehiculo-img" />
                     <h2>Coupé</h2>
-                    <Image src={vehiculo4} className="vehiculo-img" alt="vehiculo-img" />
-                </a>
+                </div>
             </Link>
 
             <Link href="/products">
-                <a className={styles.card}>
+                <div className={styles.card}>
+                    <Image src={vehiculo2} objectFit="cover" alt="vehiculo-img" />
                     <h2>Sedán</h2>
-                    <Image src={vehiculo2} className="vehiculo-img" alt="vehiculo-img" />
-                </a>
+                </div>
             </Link>
 
             <Link href="/products">
-                <a className={styles.card}>
+                <div className={styles.card}>
+                    <Image src={vehiculo3} objectFit="cover" alt="vehiculo-img" />
                     <h2>Hatchback</h2>
-                    <Image src={vehiculo3} className="vehiculo-img" alt="vehiculo-img" />
-                </a>
+                </div>
             </Link>
             </div>
         </div>
