@@ -5,16 +5,17 @@ import styles from "../styles/Home.module.css";
 
 export default function Formulario() {
   const [formSend, setFormSend] = useState(false);
+  let filebase64;
 
   const sendData = async (data) => {
     try {
       const post = await axios({
         method: "post",
-        url: "URL_POST",
+        url: "https://criptocar-api.azurewebsites.net/api/v1/post",
         data: data,
         headers: {
           Authorization:
-            "TOKEN_POST",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYzMTcyMzc2LCJleHAiOjE2NjM3NzcxNzZ9.S6OoWeogiXvTehCh2s1obih9x21sEZF1ML9rwwdxwzs",
           "Content-Type": "application/json",
         },
       });
@@ -96,22 +97,31 @@ export default function Formulario() {
     }
   };
 
+  const toBase64 = file => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+  });
+
   const handleSubmit = async (value) => {
-    const data = {
+    console.log(value)
+    const dataPost = {
       nameCar: value.nameCar,
       description: value.description,
+      filename: value.img.name,
       model: value.model,
       km: value.km,
       price: value.price,
       ubication: value.ubication,
       email: value.email,
-      img: value.img,
-      user: {
-        id: value.id,
-      },
+      message: value.message,
+      urlimagepost: filebase64
     };
-    console.log("Formulario enviado", data);
-    sendData(data);
+    console.log(dataPost)
+    console.log("Antes de enviar Post");
+    sendData(dataPost);
+    console.log("Formulario enviado", dataPost);
     setFormSend(true);
     setTimeout(() => setFormSend(false), 5000);
   };
@@ -222,8 +232,9 @@ export default function Formulario() {
                 id="img"
                 name="img"
                 accept="image/*"
-                onChange={(event) => {
-                  setFieldValue("img", event.currentTarget.files[0]);
+                onChange={async (event) => {
+                  setFieldValue("img", event.currentTarget.files[0]);                  
+                  filebase64 = await toBase64(event.currentTarget.files[0])
                 }}
               />
             </div>
