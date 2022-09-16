@@ -13,9 +13,11 @@
 }
 
 .imagewrapperC {
-  width: 100%;
+  width: 18rem;
   height: 100%;
   border-radius: 10px 10px 0 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .contentC {
