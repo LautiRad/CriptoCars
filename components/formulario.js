@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { Formik, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
+//Enviroments vars
+const API_URL = process.env.API_URL;
+const TOKEN = process.env.TOKEN;
 
 export default function Formulario() {
   const [formSend, setFormSend] = useState(false);
   let filebase64;
-
   const sendData = async (data) => {
     try {
       const post = await axios({
         method: "post",
-        url: "https://criptocar-api.azurewebsites.net/api/v1/post",
+        url: `${API_URL}/v1/post`,
         data: data,
         headers: {
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYzMTcyMzc2LCJleHAiOjE2NjM3NzcxNzZ9.S6OoWeogiXvTehCh2s1obih9x21sEZF1ML9rwwdxwzs",
+          Authorization: TOKEN,
           "Content-Type": "application/json",
         },
       });
@@ -97,15 +98,16 @@ export default function Formulario() {
     }
   };
 
-  const toBase64 = file => new Promise((resolve, reject) => {
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-  });
+      reader.onerror = (error) => reject(error);
+    });
 
   const handleSubmit = async (value) => {
-    console.log(value)
+    console.log(value);
     const dataPost = {
       nameCar: value.nameCar,
       description: value.description,
@@ -116,9 +118,9 @@ export default function Formulario() {
       ubication: value.ubication,
       email: value.email,
       message: value.message,
-      urlimagepost: filebase64
+      urlimagepost: filebase64,
     };
-    console.log(dataPost)
+    console.log(dataPost);
     console.log("Antes de enviar Post");
     sendData(dataPost);
     console.log("Formulario enviado", dataPost);
@@ -233,8 +235,8 @@ export default function Formulario() {
                 name="img"
                 accept="image/*"
                 onChange={async (event) => {
-                  setFieldValue("img", event.currentTarget.files[0]);                  
-                  filebase64 = await toBase64(event.currentTarget.files[0])
+                  setFieldValue("img", event.currentTarget.files[0]);
+                  filebase64 = await toBase64(event.currentTarget.files[0]);
                 }}
               />
             </div>
