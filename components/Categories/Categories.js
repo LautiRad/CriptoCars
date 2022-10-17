@@ -24,7 +24,7 @@ const theme = createTheme({
 function Categories() {
     return (
         <ThemeProvider theme={theme}>
-        <div className={styles.main}>
+        <div>
             <div className={styles.tabs}>
                 <h1 className={styles.title}>Catálogo</h1>
                 <Button variant="contained" href="/products">Ver todos</Button>

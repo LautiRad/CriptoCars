@@ -70,14 +70,7 @@ export default function Products() {
         <aside> 
         <HowOperate/>         
         <GeneralFooter/>
-        </aside> 
-        <div className={styles.container}>
-          <footer className={styles.footer}>
-            <a href="https://www.instagram.com/criptocars/" target="_blank" rel="noopener noreferrer">
-            <Image src={LogoNegro} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
-            </a>
-          </footer>
-        </div>
+        </aside>
       </div>
     </ThemeProvider>
   );

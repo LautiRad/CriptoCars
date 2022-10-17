@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import AppBarCC from "../components/ResponsiveAppBar/AppBarCC";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Logo from "../public/images/full.png";
-import Image from "next/image";
-import Formulario from "../components/formulario";
-import LogoNegro from '../public/images/fullNegro.png'
+import React from "react"
+import AppBarCC from "../components/ResponsiveAppBar/AppBarCC"
+import Head from "next/head"
+import styles from "../styles/Home.module.css"
+import Formulario from "../components/formulario"
 import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 
@@ -49,14 +46,7 @@ export default function Sell() {
       <aside> 
         <HowOperate/>         
         <GeneralFooter/>
-        </aside> 
-        <div className={styles.container}>
-          <footer className={styles.footer}>
-            <a href="https://www.instagram.com/criptocars/" target="_blank" rel="noopener noreferrer">
-            <Image src={LogoNegro} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
-            </a>
-          </footer>
-        </div>
+      </aside> 
       </div>
     </div>
   );
