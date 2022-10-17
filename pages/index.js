@@ -7,7 +7,7 @@ import DestArticles from '../components/DestArticles/DestArticles'
 import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 import styles from '../styles/Home.module.css'
-import LogoNegro from '../public/images/fullNegro.png';
+import LogoNegro from '../public/images/fullNegro.png'
 
 export default function Home() {
   return (

@@ -1,23 +1,19 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Image from "next/image";
-import Logo from "../../public/images/full.png";
-import Rainbow from "../Rainbow/Rainbow";
-import Link from "next/link";
-import { redirect } from "next/dist/server/api-utils";
+import * as React from "react"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import Container from "@mui/material/Container"
+import Button from "@mui/material/Button"
+import MenuItem from "@mui/material/MenuItem"
+import { ThemeProvider, createTheme } from "@mui/material/styles"
+import Image from "next/image"
+import Logo from "../../public/images/full.png"
+import Rainbow from "../Rainbow/Rainbow"
+import Link from "next/link"
 
 const theme = createTheme({
   palette: {
@@ -34,14 +30,13 @@ const theme = createTheme({
 const pages = [
   { name: "Productos", url: "./products" },
   { name: "Vender", url: "./sell" },
-  { name: "Preguntas frecuentes", url: "./#faQ" }
+  { name: "Ayuda", url: "./#faQ" }
 ];
 
 const AppBarCC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
-    console.log("ay me tocaste ahi abajo")
     setAnchorElNav(event.currentTarget);
   };
 
@@ -131,7 +126,7 @@ const AppBarCC = () => {
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
                 fontFamily: "monospace",
-                fontWeight: 700,
+                fontWeight: 500,
                 letterSpacing: ".3rem",
                 color: "inherit",
                 textDecoration: "none",

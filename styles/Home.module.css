@@ -182,6 +182,12 @@
   width: 400px;
 }
 
+.ProductsAll {
+  text-align: center;
+  margin: 30px;
+  width: 100%;
+}
+
 .HowOperateGrid { 
   display: flex;
   justify-content: space-between;

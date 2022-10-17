@@ -5,6 +5,9 @@ import styles from "../styles/Home.module.css";
 import Logo from "../public/images/full.png";
 import Image from "next/image";
 import Formulario from "../components/formulario";
+import LogoNegro from '../public/images/fullNegro.png'
+import HowOperate from '../components/HowOperate/HowOperate'
+import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 
 export default function Sell() {
   return (
@@ -43,19 +46,17 @@ export default function Sell() {
       </div>
 
       <div className={styles.container}>
-        <footer className={styles.footer}>
-          <a
-            href="https://www.instagram.com/criptocars/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src={Logo}
-              alt="Logo"
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-            />
-          </a>
-        </footer>
+      <aside> 
+        <HowOperate/>         
+        <GeneralFooter/>
+        </aside> 
+        <div className={styles.container}>
+          <footer className={styles.footer}>
+            <a href="https://www.instagram.com/criptocars/" target="_blank" rel="noopener noreferrer">
+            <Image src={LogoNegro} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}/>
+            </a>
+          </footer>
+        </div>
       </div>
     </div>
   );
