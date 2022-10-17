@@ -461,3 +461,22 @@ margin-left: 8px;
     filter: invert(1);
   }
 }
+
+/* Footer  */
+
+.footer {
+  height: 280px;
+  background-color: #000000;
+}
+
+.footer2 {
+  background-color: #ed1848;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.footer2 p {
+  color: white;
+}
