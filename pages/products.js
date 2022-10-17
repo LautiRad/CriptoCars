@@ -57,17 +57,15 @@ export default function Products() {
           <meta name="description" content="Versión beta de criptocars" />
           <link rel="icon" href="/icon.ico" />
         </Head>
-        <AppBarCC />
-
-        {/* <ProductCard /> */}
-        <Grid container spacing={2}>
-          {data &&
-            data.map((element) => {
-              return <ProductCard key={element.id} {...element} />;
-            })}
-        </Grid>
+        <AppBarCC /> 
         <div className={styles.ProductsAll}>
-
+          {/* <ProductCard /> */}
+            <Grid container spacing={2}>
+              {data &&
+                data.map((element) => {
+                  return <ProductCard key={element.id} {...element} />;
+                })}
+            </Grid>
         </div>
         <aside> 
         <HowOperate/>         
