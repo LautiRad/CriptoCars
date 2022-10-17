@@ -104,6 +104,26 @@
   height: 172px;
 }
 
+.cardsCategories
+
+.cardsCategories {
+  margin: 1rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  height: 150px;
+}
+
+.cardsCategories:hover,
+.cardsCategories:focus,
+.cardsCategories:active {
+  color: #ed1848;
+  border-color: #ed1848;
+}
+
 .card:hover,
 .card:focus,
 .card:active {
