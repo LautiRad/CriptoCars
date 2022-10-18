@@ -484,8 +484,16 @@ margin-left: 8px;
 /* Footer  */
 
 .footer {
-  height: 280px;
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
   background-color: #000000;
+}
+
+.footerSocial{
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
 }
 
 .footer2 {
