@@ -23,7 +23,7 @@ export default function Sell() {
             <h2>Formulario de Venta</h2>
             <br />
             <p>
-              Para publicar tu vehículo en criptocars tendrás que completar y
+              Para publicar tu vehículo en criptocars deberás completar y
               enviar el siguiente formulario.
             </p>
             <br />
