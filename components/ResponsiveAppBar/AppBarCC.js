@@ -11,10 +11,11 @@ import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import Image from "next/image"
-import Logo from "../../public/images/full.png"
 import Rainbow from "../Rainbow/Rainbow"
 import Link from "next/link"
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import Logo from '../../public/images/full.svg'
 const theme = createTheme({
   palette: {
     type: "light",
@@ -28,7 +29,7 @@ const theme = createTheme({
 });
 
 const pages = [
-  { name: "Productos", url: "./products" },
+  { name: "Servicios", url: "./services" },
   { name: "Vender", url: "./sell" },
   { name: "Ayuda", url: "./#faQ" }
 ];
@@ -68,7 +69,7 @@ const AppBarCC = () => {
                 textDecoration: "none",
               }}
             ></Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -100,7 +101,7 @@ const AppBarCC = () => {
                 {pages.map((page, index) => (
                   <MenuItem key={index} onClick={handleCloseNavMenu}>
                     <Link href={page.url}>
-                      <Typography textAlign="center">
+                      <Typography textAlign="center" textTransform="capitalize">
                         {page.name}
                       
                       </Typography>
@@ -122,8 +123,8 @@ const AppBarCC = () => {
               component="a"
               href=""
               sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
+                display: { xs: "none", md: "flex" },
+                flexDirection: 'row-reverse',
                 flexGrow: 1,
                 fontFamily: "monospace",
                 fontWeight: 500,
@@ -132,22 +133,28 @@ const AppBarCC = () => {
                 textDecoration: "none",
               }}
             ></Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", paddingLeft: '3em' }, justifyContent: 'end', alignItems: 'center'}}>
               {pages.map((page, index) => (
                 <Button
                   key={index}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ my: 2, color: "white", display: "block", textTransform: 'capitalize', mr: 1 }}
                 >
-                <Typography textAlign="center" onClick={()=>redirect(page.url)}>
+                <Typography textAlign="center" onClick={()=>redirect(page.url)} fontSize= '14px'>
                         {page.name}
                       
                       </Typography>
                 </Button>
               ))}
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}></Box>
+              <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex"}, gap: 2, justifyContent: 'end', marginLeft: '24px', marginRight: '16px'}}>
+                <Typography variant="span" textAlign="center" onClick={()=>redirect('/')} fontSize= '14px' sx={{ cursor: 'pointer',my: 4, color: "white", display: "block", alignItems: 'center', justifyContent: 'center'}}>
+                  <FavoriteBorderIcon sx={{fontSize: '18px'}}/>
+                </Typography>
+                <Typography textAlign="center" onClick={()=>redirect('/')} fontSize= '14px' sx={{ cursor: 'pointer', my: 4, color: "white", display: "block", alignItems: 'center', justifyContent: 'center'}}>
+                  <PermIdentityIcon sx={{fontSize: '18px'}}/>
+                </Typography>
+              </Box>
+            </Box>          
             <Rainbow />
           </Toolbar>
         </Container>

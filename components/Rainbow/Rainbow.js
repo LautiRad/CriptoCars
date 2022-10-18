@@ -33,19 +33,19 @@ export default function IndexPage() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme({
-        accentColor: '#1C2A3C',
+        accentColor: 'transparent',
         accentColorForeground: 'white',
       })}>
         <div
           style={{
-            width: "21vw",
+            marginLeft: '10px',
             height: "10vh",
             display: "flex",
             alignItems: "center",
-            justifyContent: "right"
+            justifyContent: "end",
           }}
         >
-          <ConnectButton />
+          <ConnectButton label="Entrar" />
         </div>
       </RainbowKitProvider>
     </WagmiConfig>

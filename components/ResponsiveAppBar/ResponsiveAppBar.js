@@ -38,7 +38,7 @@ const ResponsiveAppBar = () => {
   return (
     <ThemeProvider theme={theme}>
     <AppBar position="static" color="primary" enableColorOnDark>
-      <Container maxWidth="xl" >
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/" rel="noopener noreferrer">
             <Image src={Logo} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }}}/>
@@ -61,20 +61,20 @@ const ResponsiveAppBar = () => {
           >
           </Typography>         
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Link href="/products" rel="noopener noreferrer">
+          <Link href="/services" rel="noopener noreferrer">
               <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >Productos
+                sx={{ my: 2, color: 'white', display: 'block', textTransform: 'capitalize'}}
+              >Servicios
               </Button>
           </Link>
           <Link href="/sell" rel="noopener noreferrer">
-              <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+              <Button sx={{ my: 2, color: 'white', display: 'block', textTransform: 'capitalize' }}>
               Vender
             </Button>
           </Link>
           <Link href="/#faQ" rel="noopener noreferrer">
-            <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-              Preguntas
+            <Button sx={{ my: 2, color: 'white', display: 'block',textTransform: 'capitalize' }}>
+              Ayuda
             </Button>
           </Link>
           </Box>
