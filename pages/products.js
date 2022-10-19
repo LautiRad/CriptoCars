@@ -11,7 +11,6 @@ import LogoNegro from '../public/images/fullNegro.png'
 import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 
-
 export default function Products() {
   const theme = createTheme({
     palette: {
@@ -36,7 +35,7 @@ export default function Products() {
             headers: {
               "Content-Type": "application/json",
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjYzMTcyMzc2LCJleHAiOjE2NjM3NzcxNzZ9.S6OoWeogiXvTehCh2s1obih9x21sEZF1ML9rwwdxwzs",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjY2MTQwMTkxLCJleHAiOjE2NjY3NDQ5OTF9.jt3h4Gtw_b6k2HwMB6KTZgvPEfNldbdceQ4C4gF9oU4",
             },
           }
         );
