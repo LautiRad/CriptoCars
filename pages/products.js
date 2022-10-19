@@ -76,7 +76,7 @@ export default function Products() {
 }
 
 {
-  /*           DEJO ACÁ COMENTADA LA CARD QUE ESTA LIGADA AL GET
+  /*           DEJO ACÁ COMENTADA LAS CARDS QUE USABAMOS
 
               <div className={styles.grid}>
                 {data && data.map((element)=>{
@@ -94,32 +94,8 @@ export default function Products() {
                     </Link>
                   </div>
               )
-
-                  Y ACÁ EN ESTA PARTE LA CARD HARCODEADA
-                  <div className={styles.card_product}>
-                    <Image src={AutitoProd} className={styles.autitoimg} alt="autito-img" />
-                    <p>Fiat 500</p>
-                    <p>1.4 Cult 8v. Nafta. 2P Automático</p>
-                    <p>2015</p>
-                    <p>102.300 km</p>
-                    <p><Image src={iconUSDT} alt="LogoUSDT" />$5300</p>
-                    <p>Vicente López, Provincia de Buenos Aires.</p>
-                    <Link href="/products">
-                      <Button variant="contained">Comprar</Button>
-                    </Link>
-                  </div>
             })} 
-          
-          
-          
-          
-          
-          
-          
-          /////////////////////
-        
-        
-        
+     
          <div className={styles.grid}>
               {data && data.map((element)=>{
                 return(
