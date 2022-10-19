@@ -11,7 +11,7 @@ export default function Home() {
     <div>
       <Head>
         <title>CriptoCars</title>
-        <meta name="description" content="Versión beta de criptocars" />
+        <meta name="description" content="criptocars" />
         <link rel="icon" href="/icon.png" />
       </Head>
       <AppBarCC/>      
