@@ -33,7 +33,7 @@ export default function IndexPage() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme({
-        accentColor: 'transparent',
+        accentColor: '#1C2A3C',
         accentColorForeground: 'white',
       })}>
         <div

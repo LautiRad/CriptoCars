@@ -29,7 +29,7 @@ const theme = createTheme({
 });
 
 const pages = [
-  { name: "Servicios", url: "./services" },
+  { name: "Vehículos", url: "./products" },
   { name: "Vender", url: "./sell" },
   { name: "Ayuda", url: "./#faQ" }
 ];
