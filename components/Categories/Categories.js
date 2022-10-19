@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Button from '@mui/material/Button'
 import styles from '../../styles/Home.module.css'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { Grid } from '@mui/material';
+import { Grid } from '@mui/material'
 
 const theme = createTheme({
   palette: {
@@ -30,7 +30,6 @@ function Categories() {
                 <h1 className={styles.title}>Catálogo</h1>
                 <Button variant="contained" href="/products">Ver todos</Button>
             </div>
-            
             <Grid container mt={2} spacing='4'>
                 <Grid item xs={1} md={2}></Grid>
                 <Grid item xs={2.5} md={2}>
@@ -65,7 +64,6 @@ function Categories() {
                     </div>
                 </Link>
                 </Grid>
-
             </Grid>
             <div className={styles.grid}>
             </div>
