@@ -13,9 +13,10 @@ import { ThemeProvider, createTheme } from "@mui/material/styles"
 import Image from "next/image"
 import Rainbow from "../Rainbow/Rainbow"
 import Link from "next/link"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import Logo from '../../public/images/full.svg'
+
 const theme = createTheme({
   palette: {
     type: "light",
