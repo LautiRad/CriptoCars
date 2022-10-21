@@ -30,43 +30,40 @@ function Categories() {
                 <h1 className={styles.title}>Catálogo</h1>
                 <Button variant="contained" href="/products">Ver todos</Button>
             </div>
-            <Grid container mt={2} spacing='4'>
-                <Grid item xs={1} md={2}></Grid>
-                <Grid item xs={2.5} md={2}>
+            <Grid container spacing={4} justifyContent="center" padding="10px">
+                <Grid item xs={12} md={3}>
                     <Link href="/products">
                         <div className={styles.cardsCategories}>
-                            <Image src={vehiculo1} objectFit="cover" alt="vehiculo-img" width={240} height={180} style={{borderRadius: '10px'}}/>
+                            <Image src={vehiculo1} objectFit="cover" alt="vehiculo-img" style={{borderRadius: '10px'}}/>
                             <p>Pick Up</p>
                         </div>
                     </Link>
                 </Grid>
-                <Grid item xs={2.5} md={2}>
+                <Grid item xs={12} md={3}>
                     <Link href="/products">
                         <div className={styles.cardsCategories}>
-                            <Image src={vehiculo2} objectFit="cover" alt="vehiculo-img" width={240} height={180} style={{borderRadius: '10px'}}/>
+                            <Image src={vehiculo2} objectFit="cover" alt="vehiculo-img" style={{borderRadius: '10px'}}/>
                             <p>Sedán</p>
                         </div>
                     </Link>
                 </Grid>
-                <Grid item xs={2.5} md={2}>
+                <Grid item xs={12} md={3}>
                 <Link href="/products">
                     <div className={styles.cardsCategories}>
-                        <Image src={vehiculo4} objectFit="cover" alt="vehiculo-img" width={240} height={180} style={{borderRadius: '10px'}}/>
+                        <Image src={vehiculo4} objectFit="cover" alt="vehiculo-img" style={{borderRadius: '10px'}}/>
                         <p>Coupé</p>
                     </div>
                 </Link>
                 </Grid>
-                <Grid item xs={2.5} md={2}>
+                <Grid item xs={12} md={3}>
                 <Link href="/products">
                     <div className={styles.cardsCategories} >
-                        <Image src={vehiculo3} objectFit="cover" alt="vehiculo-img" width={240} height={180} style={{borderRadius: '10px'}}/>
+                        <Image src={vehiculo3} objectFit="cover" alt="vehiculo-img" style={{borderRadius: '10px'}}/>
                         <p>Hatchback</p>
                     </div>
                 </Link>
                 </Grid>
             </Grid>
-            <div className={styles.grid}>
-            </div>
         </div>
         </ThemeProvider>
     );
