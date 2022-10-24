@@ -32,16 +32,14 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          `${API_URL}/v1/post`,
-          {
+        const get = await axios({
+          method: "get",
+          url: `${API_URL}/v1/post`,
             headers: {
               "Content-Type": "application/json",
-              Authorization:
-                "TOKEN",
-            },
-          }
-        );
+              Authorization: `${TOKEN}`,
+            }
+          });
         setData(res.data.message);
       } catch (error) {
         console.log(error);
