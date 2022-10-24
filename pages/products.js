@@ -33,7 +33,7 @@ export default function Products() {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "${API_URL}/v1/post",
+          `${API_URL}/v1/post`,
           {
             headers: {
               "Content-Type": "application/json",
