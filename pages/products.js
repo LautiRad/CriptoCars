@@ -24,18 +24,21 @@ export default function Products() {
     },
   });
 
+  const API_URL = process.env.API_URL;
+  const TOKEN = process.env.TOKEN;
+
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "https://criptocar-api.azurewebsites.net/api/v1/post",
+          "${API_URL}/v1/post",
           {
             headers: {
               "Content-Type": "application/json",
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjY2MTQwMTkxLCJleHAiOjE2NjY3NDQ5OTF9.jt3h4Gtw_b6k2HwMB6KTZgvPEfNldbdceQ4C4gF9oU4",
+                "TOKEN",
             },
           }
         );
