@@ -8,6 +8,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import iconUSDT from '../../public/images/iconUSDT.png'
 import Link from 'next/link'
 import MapMaker from '../../assets/svgs/map-marker.svg'
+import { Grid } from '@mui/material';
 
 
 
@@ -33,11 +34,8 @@ function DestArticles() {
             <Button variant="contained" href="/products">Ver todos</Button> 
           </div>
 
-          <div className={styles.grid}>
-            
-            
+            <Grid container spacing={4} justifyContent="center" alignItems="center">
             <Link href="/products">
-            
               <a>
               <div className={styles.containerC}>
                 <Image
@@ -141,9 +139,9 @@ function DestArticles() {
               </div>
             </a>
           </Link>
-          </div>
           
-        </div>
+          </Grid>
+          </div>
       </ThemeProvider>
     );
 }
