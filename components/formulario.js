@@ -16,7 +16,7 @@ export default function Formulario() {
         url: `${API_URL}/v1/post`,
         data: data,
         headers: {
-          Authorization: TOKEN,
+          Authorization: `Bearer ${TOKEN}`,
           "Content-Type": "application/json",
         },
       });

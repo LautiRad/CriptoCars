@@ -27,6 +27,8 @@ export default function Products() {
   const API_URL = process.env.API_URL;
   const TOKEN = process.env.TOKEN;
 
+  console.log(API_URL, TOKEN);
+
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -37,10 +39,10 @@ export default function Products() {
           url: `${API_URL}/v1/post`,
             headers: {
               "Content-Type": "application/json",
-              Authorization: `${TOKEN}`,
+              Authorization: `Bearer ${TOKEN}`,
             }
           });
-        setData(res.data.message);
+        setData(get.data.message);
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +50,8 @@ export default function Products() {
     fetchProducts();
   }, []);
 
-  console.log(data);
+  console.log(data, "data");
+
   return (
     <ThemeProvider theme={theme}>
       <div>
