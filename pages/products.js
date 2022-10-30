@@ -58,7 +58,7 @@ export default function Products() {
         <Head>
           <title>CriptoCars</title>
           <meta name="description" content="criptocars" />
-          <link rel="icon" href="/icon.ico" />
+          <link rel="icon" href="/icon.png" />
         </Head>
         <AppBarCC /> 
         <div className={styles.ProductsAll}>
