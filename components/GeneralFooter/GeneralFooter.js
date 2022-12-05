@@ -10,7 +10,7 @@ import Discord from "./discord.png"
 function GeneralFooter() {
     return (
       <div className={styles.containerFooter}>
-      <div className={styles.footer}>
+      {/* <div className={styles.footer}>
           <div className={styles.footerSocial}>
             <a href="https://www.instagram.com/criptocars/" target="_blank" rel="noopener noreferrer">
             <Image
@@ -40,7 +40,7 @@ function GeneralFooter() {
             />
           </a>
           </div>
-      </div>
+      </div> */}
       <div className={styles.footer2}>
           <p className={styles.footer2}>2022 Todos los derechos reservados</p>
           <Link href="/" rel="noopener noreferrer">
