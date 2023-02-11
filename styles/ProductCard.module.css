@@ -13,7 +13,7 @@
 }
 
 .imagewrapperC {
-  width: 18rem;
+  width: 100%;
   height: 100%;
   border-radius: 10px 10px 0 0;
   position: relative;
@@ -93,7 +93,7 @@
 .specificationsC {
   display: flex;
   justify-content: space-between;
-  margin: 0 ;
+  margin-top: 20px ;
 }
 
 .specificationyearC {
@@ -115,6 +115,8 @@
 .locationC {
   display: flex;
   align-items: center;
+  margin-top: 20px ;
+  margin-bottom: 20px;
 }
 
 .locationtextC {

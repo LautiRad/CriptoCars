@@ -14,11 +14,11 @@ function ProductCard({
   km,
   description,
   price,
-  name,
+  nameCar,
   urlimagepost,
   id,
   model,
-  ubicacion,
+  ubication,
 }) {
   const theme = createTheme({
     palette: {
@@ -41,7 +41,7 @@ function ProductCard({
             width="100%"
             height="80%"
             layout="responsive"
-            objectFit="contain"
+            objectFit="cover"
           />
         </div>
         <div className={styles.contentC}>
@@ -49,8 +49,7 @@ function ProductCard({
             <div className={styles.leftC}>
               <Image className={styles.iconC} src={iconTool} alt="icon tool" />
               <div className={styles.productnameC}>
-                <p>{name}</p>
-                {/* <p>{element.name}</p> */}
+                <p>{nameCar}</p>
               </div>
             </div>
             <Image className={styles.iconC} src={Heart} alt="icon heart" />
@@ -70,7 +69,7 @@ function ProductCard({
             {/* <p>{element.price}</p> */}
           </div>
           <div className={styles.specificationsC}>
-            <p className={styles.specificationyearC}>{model}</p>{" "}
+            <p className={styles.specificationyearC}>Modelo: {model}</p>{" "}
             {/* <p>{element.year}</p> */}
             <p className={styles.specificationdistanceC}>{km} km</p>{" "}
             {/* <p>{element.distance}</p> */}
@@ -81,8 +80,7 @@ function ProductCard({
               className={styles.locationiconC}
               alt="map marker icon"
             />
-            <p className={styles.locationtextC}>{ubicacion}</p>{" "}
-            {/* <p>{element.ubication}</p> */}
+            <p className={styles.locationtextC}>{ubication}</p>{" "}
           </div>
         </div>
       </div>
