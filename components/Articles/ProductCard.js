@@ -16,7 +16,7 @@ function ProductCard({
   price,
   nameCar,
   urlimagepost,
-  id,
+  _id,
   model,
   ubication,
 }) {
@@ -31,6 +31,7 @@ function ProductCard({
       },
     },
   });
+
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.containerC}>
@@ -82,6 +83,9 @@ function ProductCard({
             />
             <p className={styles.locationtextC}>{ubication}</p>{" "}
           </div>
+          <Link href="/products/[_id]" as={`/products/${_id}`}>
+          <Button variant="contained">Ver Detalles</Button>
+          </Link>
         </div>
       </div>
     </ThemeProvider>
