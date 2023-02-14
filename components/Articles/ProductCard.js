@@ -34,60 +34,61 @@ function ProductCard({
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={styles.containerC}>
-        <div className={styles.imagewrapperC}>
-          <Image
-            src={urlimagepost}
-            alt="Autito"
-            width="100%"
-            height="80%"
-            layout="responsive"
-            objectFit="cover"
-          />
-        </div>
-        <div className={styles.contentC}>
-          <div className={styles.titlewrapperC}>
-            <div className={styles.leftC}>
-              <Image className={styles.iconC} src={iconTool} alt="icon tool" />
-              <div className={styles.productnameC}>
-                <p>{nameCar}</p>
+      <Link href={`/products/${_id}`} target="_blank">
+      <div className={styles.containerCard}>
+        <div className={styles.containerC}>
+          <div className={styles.imagewrapperC}>
+            <Image
+              src={urlimagepost}
+              alt="Autito"
+              width="100%"
+              height="80%"
+              layout="responsive"
+              objectFit="cover"
+            />
+          </div>
+          <div className={styles.contentC}>
+            <div className={styles.titlewrapperC}>
+              <div className={styles.leftC}>
+                <Image className={styles.iconC} src={iconTool} alt="icon tool" />
+                <div className={styles.productnameC}>
+                  <p>{nameCar}</p>
+                </div>
               </div>
+              <Image className={styles.iconC} src={Heart} alt="icon heart" />
             </div>
-            <Image className={styles.iconC} src={Heart} alt="icon heart" />
+            <div className={styles.descriptionC}>
+              <p className={styles.descriptiontextC}>{description}</p>
+              {/* <p>{element.description}</p> */}
+            </div>
+            <div className={styles.priceC}>
+              <Image
+                className={styles.iconusdtC}
+                src={iconUSDT}
+                alt="icon usdt"
+              />
+              <p className={styles.pricecurrencyC}>USDT</p>
+              <p className={styles.priceamountC}>{price}</p>
+              {/* <p>{element.price}</p> */}
+            </div>
+            <div className={styles.specificationsC}>
+              <p className={styles.specificationyearC}>Modelo: {model}</p>{" "}
+              {/* <p>{element.year}</p> */}
+              <p className={styles.specificationdistanceC}>{km} km</p>{" "}
+              {/* <p>{element.distance}</p> */}
+            </div>
+            <div className={styles.locationC}>
+              <Image
+                src={MapMaker}
+                className={styles.locationiconC}
+                alt="map marker icon"
+              />
+              <p className={styles.locationtextC}>{ubication}</p>{" "}
+            </div>
           </div>
-          <div className={styles.descriptionC}>
-            <p className={styles.descriptiontextC}>{description}</p>
-            {/* <p>{element.description}</p> */}
-          </div>
-          <div className={styles.priceC}>
-            <Image
-              className={styles.iconusdtC}
-              src={iconUSDT}
-              alt="icon usdt"
-            />
-            <p className={styles.pricecurrencyC}>USDT</p>
-            <p className={styles.priceamountC}>{price}</p>
-            {/* <p>{element.price}</p> */}
-          </div>
-          <div className={styles.specificationsC}>
-            <p className={styles.specificationyearC}>Modelo: {model}</p>{" "}
-            {/* <p>{element.year}</p> */}
-            <p className={styles.specificationdistanceC}>{km} km</p>{" "}
-            {/* <p>{element.distance}</p> */}
-          </div>
-          <div className={styles.locationC}>
-            <Image
-              src={MapMaker}
-              className={styles.locationiconC}
-              alt="map marker icon"
-            />
-            <p className={styles.locationtextC}>{ubication}</p>{" "}
-          </div>
-          <Link href="/products/[_id]" as={`/products/${_id}`}>
-          <Button variant="contained">Ver Detalles</Button>
-          </Link>
         </div>
       </div>
+      </Link>
     </ThemeProvider>
   );
 }
