@@ -135,7 +135,93 @@
   .telegramC {
     padding: 5px;
   }
-  
+
+  .tabs {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .tabs h1 {
+    font-size: 1.5em;
+    padding-top: 50px;
+    padding-bottom: 20px;;
+  }
+
+  .propertiesC{
+    border-bottom: 1px #D0D0D0 solid;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .propertiesC:last-child{
+    border-bottom: 0;
+  }
+
+  .propertiesTitleC{
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .propertiesTextC{
+    line-height: 24px;
+  }
+
+  .productTab{
+    text-transform: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: #121317;
+  }
+  .productBox{
+    width:100%;
+    margin-top:40px;
+  }
+
+  .productBoxHeader{
+    padding: 24px;
+    margin-bottom:20px;
+  }
+
+  .productBoxBody{
+    padding-left: 16px;
+  }
+
+  .detailsC{
+    color: #121317;
+  }
+
+  .containerPropertiesC{
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #D0D0D0;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 600px) {
+    .propertiesC {
+      margin: 0;
+    }
+    .productTab{
+      font-size: 15px;
+    }
+    .productBoxHeader{
+      padding: 0;
+    }
+    .detailsC{
+      width: 100%;
+    }
+  }
+
+
   @media (min-width: 600px) {
     .formulario {
       min-width: 600px;

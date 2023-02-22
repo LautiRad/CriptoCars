@@ -9,6 +9,8 @@ import styles from '../../styles/CarDetails.module.css'
 import { Grid } from "@mui/material"
 import HowOperate from '../../components/HowOperate/HowOperate'
 import GeneralFooter from '../../components/GeneralFooter/GeneralFooter'
+import ProductProperties from '../../components/Product/ProductProperties'
+import ProductTab from '../../components/Product/ProductTab'
 import iconUSDT from "../../public/images/iconUSDT.png";
 import iconTool from "../../assets/svgs/iconTool.svg";
 import Heart from "../../assets/svgs/heart.svg";
@@ -16,6 +18,7 @@ import MapMaker from "../../assets/svgs/map-marker.svg";
 import iconGmail from "../../assets/svgs/gmail.svg";
 import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
+import Button from "@mui/material/Button";
 
 export default function ProductDetails() {
   const router = useRouter();
@@ -65,7 +68,7 @@ export default function ProductDetails() {
         </Head>
         <AppBarCC /> 
       {data && (
-        <Grid container spacing={2} p={4}> 
+        <Grid container spacing={2} p={4}>
           <Grid item sm={12} md={7}>
             <Image
               src={data.urlimagepost}
@@ -156,11 +159,14 @@ export default function ProductDetails() {
           </div>
         </div>
         </Grid>
+          <ProductProperties properties={data}/>
+          <ProductTab properties={data}/>
         </Grid>
         )}
+
         <aside> 
-        <HowOperate/>         
-        <GeneralFooter/>
+          <HowOperate/>
+          <GeneralFooter/>
         </aside>
       </div> 
     </ThemeProvider>
