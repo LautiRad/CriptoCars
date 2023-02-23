@@ -31,4 +31,6 @@ const Label = forwardRef(({ children, color = 'default', sx, ...other }, ref) =>
   );
 });
 
+Label.displayName = "Label";
+
 export default Label;
