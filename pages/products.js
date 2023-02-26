@@ -50,8 +50,6 @@ export default function Products() {
     fetchProducts();
   }, []);
 
-  console.log(data, "data");
-
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -60,7 +58,7 @@ export default function Products() {
           <meta name="description" content="criptocars" />
           <link rel="icon" href="/icon.png" />
         </Head>
-        <AppBarCC /> 
+        {/* <AppBarCC />  */}
         <div className={styles.ProductsAll}>
           {/* <ProductCard /> */}
             <Grid container spacing={2}>
