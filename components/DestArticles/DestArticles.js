@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image'
-import vehiculoD1 from './vehiculoD1.png'
-import vehiculoD2 from './vehiculoD2.png'
+import vehiculoD1 from './item1.svg'
+import vehiculoD2 from './item2.svg'
 import Button from '@mui/material/Button'
 import styles from '../../styles/Home.module.css'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -9,8 +9,6 @@ import iconUSDT from '../../public/images/iconUSDT.png'
 import Link from 'next/link'
 import MapMaker from '../../assets/svgs/map-marker.svg'
 import { Grid } from '@mui/material';
-
-
 
 function DestArticles() {
   const theme = createTheme({

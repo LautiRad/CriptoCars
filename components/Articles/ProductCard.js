@@ -2,10 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Link from "next/link";
-import { Button } from "@mui/material";
 import styles from "../../styles/ProductCard.module.css";
-import AutitoProd from "../../public/images/autitoProd.png";
-import iconUSDT from "../../public/images/iconUSDT.png";
+import iconUSDT from "../../public/images/iconUSDT.svg";
 import iconTool from "../../assets/svgs/iconTool.svg";
 import Heart from "../../assets/svgs/heart.svg";
 import MapMaker from "../../assets/svgs/map-marker.svg";
@@ -59,7 +57,6 @@ function ProductCard({
             </div>
             <div className={styles.descriptionC}>
               <p className={styles.descriptiontextC}>{description}</p>
-              {/* <p>{element.description}</p> */}
             </div>
             <div className={styles.priceC}>
               <Image
@@ -69,13 +66,10 @@ function ProductCard({
               />
               <p className={styles.pricecurrencyC}>USDT</p>
               <p className={styles.priceamountC}>{price}</p>
-              {/* <p>{element.price}</p> */}
             </div>
             <div className={styles.specificationsC}>
               <p className={styles.specificationyearC}>Modelo: {model}</p>{" "}
-              {/* <p>{element.year}</p> */}
               <p className={styles.specificationdistanceC}>{km} km</p>{" "}
-              {/* <p>{element.distance}</p> */}
             </div>
             <div className={styles.locationC}>
               <Image

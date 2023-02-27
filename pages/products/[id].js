@@ -11,7 +11,7 @@ import HowOperate from '../../components/HowOperate/HowOperate'
 import GeneralFooter from '../../components/GeneralFooter/GeneralFooter'
 import ProductProperties from '../../components/Product/ProductProperties'
 import ProductTab from '../../components/Product/ProductTab'
-import iconUSDT from "../../public/images/iconUSDT.png";
+import iconUSDT from "../../public/images/iconUSDT.svg";
 import iconTool from "../../assets/svgs/iconTool.svg";
 import Heart from "../../assets/svgs/heart.svg";
 import MapMaker from "../../assets/svgs/map-marker.svg";

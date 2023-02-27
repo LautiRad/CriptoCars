@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../styles/Home.module.css'
 import Link from "next/link";
 import Image from 'next/image';
-import Logo from "../../public/images/full.png";
+import Logo from '../../public/images/full.svg'
 import Instagram from "./instagram.png"
 import Twitter from "./twitter.png"
 import Discord from "./discord.png"

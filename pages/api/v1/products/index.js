@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import nc from "next-connect";
 import connectToDatabase from "../../../../utils/mongodb";
 
@@ -9,7 +8,6 @@ handler.get(async (req, res) => {
   try {
     const { db } = await connectToDatabase();
     const vehicles = await db.collection('vehicles').find().toArray();
-    console.log({vehicles})
     res.status(200).json({vehicles});
   } catch (error) {
     console.log(error);

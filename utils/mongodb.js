@@ -5,9 +5,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 let cachedDb;
 
-export default async function connectToDatabase() {
+async function connectToDatabase() {
     if (!cachedDb || !client.topology.isConnected()) {
-        console.log('Connecting to database...');
         await client.connect();
         console.log('Connected to database');
         cachedDb = client.db('criptocars');
@@ -15,3 +14,5 @@ export default async function connectToDatabase() {
     const db = client.db('criptocars');
     return { db };
 }
+
+module.exports = connectToDatabase;
