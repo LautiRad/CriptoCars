@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar"
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../../public/images/full.svg";
-import * as React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 
 export default function Header() {
