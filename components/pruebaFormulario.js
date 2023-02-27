@@ -2,130 +2,97 @@ import React, { useState } from "react";
 import { Formik, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
-//Enviroments vars
-const API_URL = process.env.API_URL;
-const TOKEN = process.env.TOKEN;
+import { uploadFile } from "./firebase"
 
 export default function Formulario() {
   const [formSend, setFormSend] = useState(false);
-  let filebase64;
-  const sendData = async (data) => {
-    try {
-      const post = await axios({
-        method: "post",
-        url: `${API_URL}/v1/post`,
-        data: data,
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(post, "se envio");
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const [file, setFile] = useState(null);
 
   const initialValues = {
     id: "",
-    nameCar: "",
+    name: "",
     description: "",
     model: "",
     km: "",
     price: "",
     ubication: "",
     email: "",
-    img: "",
+    image: "",
     message: "",
+    status: "Draft",
   };
 
   const validate = (value) => {
     let errors = {};
-    {
-      // Validacion nombre
-      if (!value.nameCar) {
-        errors.nameCar = "Por favor ingresa un nombre";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.nameCar)) {
-        errors.nameCar = "El nombre solo puede contener letras y espacios";
+      if (!value.name) {
+        errors.name = "Por favor ingresa un nombre";
+      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.name)) {
+        errors.name = "El nombre solo puede contener letras y espacios";
       }
-      // Validacion marca
       if (!value.model) {
         errors.model = "Por favor ingresa una marca";
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.model)) {
         errors.model = "El nombre solo puede contener letras y espacios";
       }
-      // Validacion descripcion
       if (!value.descripcion) {
         errors.descripcion = "Por favor ingresa una descripcion";
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.descripcion)) {
         errors.descripcion =
           "La descripcion solo puede contener letras y espacios";
       }
-      // Validacion model
       if (!value.model) {
         errors.model = "Por favor ingresa un modelo";
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.model)) {
         errors.model = "El Año del modelo solo puede contener numeros";
       }
-      // Validacion km
       if (!value.km) {
         errors.km = "Por favor ingresa un km";
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.km)) {
-        errors.km = "El nombre solo puede contener letras y espacios";
+        errors.km = "El Año del modelo solo puede contener numeros";
       }
-
-      // Validacion precio
       if (!value.precio) {
         errors.precio = "Por favor ingresa un precio";
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.precio)) {
         errors.precio = "El nombre solo puede contener letras y espacios";
       }
-      // Validacion ubicacion
       if (!value.ubicacion) {
         errors.ubicacion = "Por favor ingresa una ubicación";
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.ubicacion)) {
         errors.ubicacion = "El nombre solo puede contener letras y espacios";
       }
-      // Validacion correo
-      if (!value.correo) {
-        errors.correo = "Por favor ingresa un correo electronico";
+      if (!value.email) {
+        errors.email = "Por favor ingresa un correo electronico";
       } else if (
-        !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value.correo)
+        !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value.email)
       ) {
-        errors.correo =
+        errors.email =
           "El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.";
       }
-    }
+    return errors;
   };
 
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
   const handleSubmit = async (value) => {
-    console.log(value);
-    const dataPost = {
-      nameCar: value.nameCar,
-      description: value.description,
-      filename: value.img.name,
-      model: value.model,
-      km: value.km,
-      price: value.price,
-      ubication: value.ubication,
-      email: value.email,
-      message: value.message,
-      urlimagepost: filebase64,
-    };
-    console.log(dataPost);
-    console.log("Antes de enviar Post");
-    sendData(dataPost);
-    console.log("Formulario enviado", dataPost);
-    setFormSend(true);
-    setTimeout(() => setFormSend(false), 5000);
+    try {
+      const result = await uploadFile(file);
+      console.log(result);
+      const dataPost = {
+        name: value.name,
+        description: value.description,
+        model: value.model,
+        km: value.km,
+        price: value.price,
+        ubication: value.ubication,
+        email: value.email,
+        message: value.message,
+        image: result,
+        status: "Draft",
+      };
+      const response = await axios.post('/api/v1/products', dataPost);
+      setFormSend(true);
+      setTimeout(() => setFormSend(false), 5000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -135,20 +102,20 @@ export default function Formulario() {
         validate={validate}
         onSubmit={handleSubmit}
       >
-        {({ errors, handleSubmit, setFieldValue }) => (
+        {({ errors, handleSubmit}) => (
           <form onSubmit={handleSubmit} className={styles.formulario}>
             <div>
-              <label htmlFor="nameCar">Marca y Modelo:</label>
+              <label htmlFor="name">Marca y Modelo:</label>
               <Field
                 type="text"
-                id="nameCar"
-                name="nameCar"
+                id="name"
+                name="name"
                 placeholder="Chevrolet S10"
               />
               <ErrorMessage
-                name="nameCar"
+                name="name"
                 component={() => (
-                  <div className={styles.error}>{errors.marca}</div>
+                  <div className={styles.error}>{errors.name}</div>
                 )}
               />
             </div>
@@ -228,16 +195,13 @@ export default function Formulario() {
               />
             </div>
             <div>
-              <label htmlFor="img">Imagen: </label>
+              <label htmlFor="image">Imagen: </label>
               <input
-                type="file"
-                id="img"
-                name="img"
-                accept="image/*"
-                onChange={async (event) => {
-                  setFieldValue("img", event.currentTarget.files[0]);
-                  filebase64 = await toBase64(event.currentTarget.files[0]);
-                }}
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    onChange={(value) => setFile(value.currentTarget.files[0])}
               />
             </div>
             <div>

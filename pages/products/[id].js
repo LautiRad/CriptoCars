@@ -20,31 +20,17 @@ import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
 import Button from "@mui/material/Button";
 
-export default function ProductDetails() {
+export default function ProductDetails({ vehicle }) {
   const router = useRouter();
   const { id } = router.query;
-  const API_URL = process.env.API_URL;
-  const TOKEN = process.env.TOKEN;
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const get = await axios({
-          method: "get",
-          url: `${API_URL}/v1/post/${id}`,
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TOKEN}`,
-            }
-          });
-        setData(get.data.message);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDetails();
-  }, []);
+    fetch(`/api/v1/products/${id}`)
+      .then(response => response.json())
+      .then(data => setData(data.vehicle))
+      .catch(error => console.error(error));
+  }, [id]);
 
   const theme = createTheme({
     palette: {
@@ -71,7 +57,7 @@ export default function ProductDetails() {
         <Grid container spacing={2} p={4}>
           <Grid item sm={12} md={7}>
             <Image
-              src={data.urlimagepost}
+              src={data.image}
               alt="Autito"
               width="100%"
               height="60%"
@@ -87,20 +73,17 @@ export default function ProductDetails() {
               <div className={styles.leftC}>
                 <Image className={styles.iconC} src={iconTool} alt="icon tool" />
                 <div className={styles.productnameC}>
-                  <p>{data.nameCar}</p>
+                  <p>{data.name}</p>
                 </div>
               </div>
               <Image className={styles.iconC} src={Heart} alt="icon heart" />
             </div>
             <div className={styles.descriptionC}>
               <p className={styles.descriptiontextC}>{data.description}</p>
-              {/* <p>{element.description}</p> */}
             </div>
             <div className={styles.specificationsC}>
               <p className={styles.specificationyearC}>Modelo: {data.model}</p>{" "}
-              {/* <p>{element.year}</p> */}
               <p className={styles.specificationdistanceC}>{data.km} km</p>{" "}
-              {/* <p>{element.distance}</p> */}
             </div>
             <div className={styles.locationC}>
               <Image
@@ -118,9 +101,7 @@ export default function ProductDetails() {
               />
               <p className={styles.pricecurrencyC}>USDT</p>
               <p className={styles.priceamountC}>{data.price}</p>
-              {/* <p>{element.price}</p> */}
             </div>
-            {/* Contacto */}
             <div className={styles.contactC}>
               <p className={styles.descriptiontextC}>CONTACTO</p>
               <div className={styles.contactIcons}>
@@ -144,7 +125,6 @@ export default function ProductDetails() {
                 </div>
               </div>
             </div>
-            {/* Pago */}
             <div className={styles.contactC}>
               <p className={styles.descriptiontextC}>PAGO POR SMART CONTRACTS</p>
                 <div className={styles.paydece}>
@@ -173,8 +153,19 @@ export default function ProductDetails() {
       );
 }
 
-ProductDetails.getInitialProps = ({ query }) => {
-  return {
-    id: query.id,
-  };
-};
+// export async function getServerSideProps({ params }) {
+//   const { db } = await connectToDatabase();
+//   const { id } = params;
+//   const data = await db.collection('vehicles').findOne({ _id: ObjectId(id) });
+
+//   if (!data) {
+//     return {
+//       notFound: true
+//     }
+//   }
+//   return {
+//     props: {
+//       product: JSON.parse(JSON.stringify(data))
+//     }
+//   }
+// }

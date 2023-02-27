@@ -2,7 +2,7 @@ import React from "react"
 import AppBarCC from "../components/ResponsiveAppBar/AppBarCC"
 import Head from "next/head"
 import styles from "../styles/Home.module.css"
-import Formulario from "../components/formulario"
+import Formulario from "../components/pruebaFormulario"
 import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
 
@@ -15,8 +15,6 @@ export default function Sell() {
         <link rel="icon" href="/icon.png" />
       </Head>
       <AppBarCC />
-      <br></br>
-
       <div className={styles.grid}>
         <div className={styles.sell_form}>
           <a className={styles.card_form}>

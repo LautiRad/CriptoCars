@@ -14,8 +14,8 @@ function ProductCard({
   km,
   description,
   price,
-  nameCar,
-  urlimagepost,
+  name,
+  image,
   _id,
   model,
   ubication,
@@ -39,7 +39,7 @@ function ProductCard({
         <div className={styles.containerC}>
           <div className={styles.imagewrapperC}>
             <Image
-              src={urlimagepost}
+              src={image}
               alt="Autito"
               width="100%"
               height="80%"
@@ -52,7 +52,7 @@ function ProductCard({
               <div className={styles.leftC}>
                 <Image className={styles.iconC} src={iconTool} alt="icon tool" />
                 <div className={styles.productnameC}>
-                  <p>{nameCar}</p>
+                  <p>{name}</p>
                 </div>
               </div>
               <Image className={styles.iconC} src={Heart} alt="icon heart" />

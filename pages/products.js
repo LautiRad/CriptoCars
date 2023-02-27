@@ -24,30 +24,16 @@ export default function Products() {
     },
   });
 
-  const API_URL = process.env.API_URL;
-  const TOKEN = process.env.TOKEN;
-
-  console.log(API_URL, TOKEN);
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const get = await axios({
-          method: "get",
-          url: `${API_URL}/v1/post`,
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TOKEN}`,
-            }
-          });
-        setData(get.data.message);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProducts();
+    async function fetchData() {
+      const res = await fetch("/api/v1/products");
+      const data = await res.json();
+      setData(data.vehicles);
+    }
+
+    fetchData();
   }, []);
 
   return (
@@ -58,7 +44,7 @@ export default function Products() {
           <meta name="description" content="criptocars" />
           <link rel="icon" href="/icon.png" />
         </Head>
-        {/* <AppBarCC />  */}
+        <AppBarCC /> 
         <div className={styles.ProductsAll}>
           {/* <ProductCard /> */}
             <Grid container spacing={2}>
@@ -75,45 +61,4 @@ export default function Products() {
       </div>
     </ThemeProvider>
   );
-}
-
-{
-  /*           DEJO ACÁ COMENTADA LAS CARDS QUE USABAMOS
-
-              <div className={styles.grid}>
-                {data && data.map((element)=>{
-                  return(
-                  <div className={styles.card_product}>
-                    <Image src={AutitoProd} className={styles.autitoimg} alt="autito-img" />
-                    <p>{element.name}</p>
-                    <p>{element.description}</p>
-                    <p>{element.model}</p>
-                    <p>{element.km}</p>
-                    <p><Image src={iconUSDT} />${element.price}</p>
-                    <p>{element.ubication}</p>
-                    <Link href="/products">
-                      <Button variant="contained">Comprar</Button>
-                    </Link>
-                  </div>
-              )
-            })} 
-     
-         <div className={styles.grid}>
-              {data && data.map((element)=>{
-                return(
-                <div className={styles.card_product}>
-                  <Image src={AutitoProd} className={styles.autitoimg} alt="autito-img" />
-                  <p>{element.name}</p>
-                  <p>{element.description}</p>
-                  <p>{element.model}</p>
-                  <p>{element.km}</p>
-                  <p><Image src={iconUSDT} />${element.price}</p>
-                  <p>{element.ubication}</p>
-                  <Link href="/products">
-                    <Button variant="contained">Comprar</Button>
-                  </Link>
-                </div>
-            )
-                
-          })}*/
 }
