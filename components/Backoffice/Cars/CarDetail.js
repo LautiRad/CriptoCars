@@ -17,7 +17,7 @@ import Button from '@mui/material/Button'
 import {useRouter} from "next/router";
 import {useEffect} from "react";
 import axios from "axios";
-
+import Modal from '@mui/material/Modal';
 
 const ImgStyled = styled('img')(({ theme }) => ({
     width: '50%',
@@ -43,6 +43,18 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
     }
 }))
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
 const CarDetail = () => {
     // ** State
     const [openAlert, setOpenAlert] = useState(true)
@@ -57,12 +69,19 @@ const CarDetail = () => {
         }
     }
 
+    const handleDelete = async () => {
+        const get = await axios.delete(`/api/v1/products/${id}`)
+        window.location.href = '/backoffice';
+    };
+
     const router = useRouter();
     const API_URL = process.env.API_URL;
     const TOKEN = process.env.TOKEN;
     const [data, setData] = useState(null);
     const { id } = router.query;
-
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -74,14 +93,11 @@ const CarDetail = () => {
             try {
                 const get = await axios({
                     method: "get",
-                    url: `${API_URL}/v1/post/${id}`,
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${TOKEN}`,
-                    }
+                    url: `/api/v1/products/${id}`,
                 });
-                setData(get.data.message);
-                setImgSrc(get.data.message.urlimagepost)
+                setData(get.data.vehicle);
+                setImgSrc(get.data.vehicle.image)
+                console.log(get.data.vehicle.image);
             } catch (error) {
                 console.log(error);
             }
@@ -96,16 +112,16 @@ const CarDetail = () => {
                     <Grid container spacing={7}>
                         <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                {data.urlimagepost != null && (<ImgStyled src={imgSrc} alt='Profile Pic' />)}
+                                {data.image != null && (<ImgStyled src={imgSrc} alt='Car Pic' />)}
                                 <Box>
-                                    <ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
+                                    <ButtonStyled component='label' variant='contained' htmlFor='car-upload-image'>
                                         Subir nueva foto.
                                         <input
                                             hidden
                                             type='file'
                                             onChange={onChange}
                                             accept='image/png, image/jpeg'
-                                            id='account-settings-upload-image'
+                                            id='car-upload-image'
                                         />
                                     </ButtonStyled>
                                     <ResetButtonStyled color='error' variant='outlined' onClick={() => setImgSrc('/images/avatars/1.png')}>
@@ -119,7 +135,7 @@ const CarDetail = () => {
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Nombre' value={data.nameCar} />
+                            <TextField fullWidth label='Nombre' value={data.name} />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField fullWidth label='Modelo' value={data.model} />
@@ -156,11 +172,36 @@ const CarDetail = () => {
                             <Button type='reset' variant='outlined' color='secondary'>
                                 Reset
                             </Button>
+                            <Button onClick={handleOpen} color='error' variant='contained' sx={{ marginLeft: 3.5 }}>
+                                Eliminar
+                            </Button>
                         </Grid>
                     </Grid>
                 </form>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <Container>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                ¿Esta seguro de querer eliminar el auto?
+                            </Typography>
+                            <br/>
+                            <Button onClick={handleDelete} variant='outlined' sx={{ marginRight: 3.5 }}>
+                                ACEPTAR
+                            </Button>
+                            <Button onClick={handleClose} variant='outlined' sx={{ marginRight: 3.5 }}>
+                                CANCELAR
+                            </Button>
+                        </Container>
+                    </Box>
+                </Modal>
             </CardContent>)}
         </Container>
+
     )
 }
 

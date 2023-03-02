@@ -17,11 +17,16 @@ handler.get(async (req, res) => {
 
 // POST /api/v1/products
 handler.post(async (req, res) => {
+    try {
       const { db } = await connectToDatabase();
-      const { name, description, model, km, price, ubication, status, email, image, message } = req.body;
+      const { name, description, model, km, price, ubication, status, email, image, message, visibility } = req.body;
       console.log(req.body);
-      const result = await db.collection('vehicles').insertOne({ name, description, model, km, price, ubication, status, email, image, message });
-      res.status(200).json({body});
-  });
+      const result = await db.collection('vehicles').insertOne({ name, description, model, km, price, ubication, status, visibility, email, image, message });
+      res.status(200).json({result});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al guardar el vehiculo." });
+    }
+    });
 
 export default handler;

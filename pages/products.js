@@ -49,7 +49,7 @@ export default function Products() {
           {/* <ProductCard /> */}
             <Grid container spacing={2}>
               {data &&
-                data.map((element) => {
+                data.filter(element => element.visibility).map((element) => {
                   return <ProductCard key={element.id} {...element} />;
                 })}
             </Grid>

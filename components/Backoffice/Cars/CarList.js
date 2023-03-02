@@ -15,24 +15,22 @@ export default function CarList({... other }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      setIsLoading(true);
-      try {
-        const get = await axios({
-          method: "get",
-          url: `${API_URL}/v1/post/`,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${TOKEN}`,
-          }
-        });
-        setData(get.data.message);
-        setIsLoading(false)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDetails();
+    if(products==null) {
+      const fetchDetails = async () => {
+        setIsLoading(true);
+        try {
+          const get = await axios({
+            method: "get",
+            url: `/api/v1/products`,
+          });
+          setData(get.data.vehicles);
+          setIsLoading(false)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchDetails();
+    }
   }, []);
 
   const renderUser = (
