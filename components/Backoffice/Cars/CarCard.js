@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 // components
 import Label from '../Label/Label.js';
 import {useState} from "react";
+import axios from "axios";
 
 // ----------------------------------------------------------------------
 
@@ -19,12 +20,14 @@ const StyledProductImg = styled('img')({
 // ----------------------------------------------------------------------
 
 export default function CarCard({ product }) {
-  const { nameCar, urlimagepost, price, description, status, model , _id} = product;
+  const { name, image, price, description, status, model, visibility , _id} = product;
 
-  const [checked, setData] = useState(true);
+  const [checked, setData] = useState(visibility);
 
-  function handleChange() {
-      setData(!checked);
+  async function handleChange() {
+    setData(!checked);
+    product.visibility = !checked
+    const put = await axios.put(`/api/v1/products/${_id}`, product)
   }
 
   return (
@@ -46,13 +49,13 @@ export default function CarCard({ product }) {
               {status}
             </Label>
           )}
-          <StyledProductImg alt={nameCar} src={urlimagepost} />
+          <StyledProductImg alt={name} src={image} />
         </Box>
 
         <Stack spacing={1} sx={{ p: 3 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="h6" noWrap>
-              {nameCar}
+              {name}
             </Typography>
             <Typography variant="subtitle2" noWrap>
               {model}
