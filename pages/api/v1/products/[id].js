@@ -25,10 +25,10 @@ handler.put(async (req, res) => {
   const { id } = req.query;
   try {
     const { db } = await connectToDatabase();
-    const { name, description, model, km, price, ubication, status, email, image, message } = req.body;
+    const { name, description, model, km, price, ubication, status, visibility, email, image, message } = req.body;
     const result = await db.collection("vehicles").updateOne(
       { _id: new ObjectId(id) },
-      { $set: { name, description, model, km, price, ubication, status, email, image, message } }
+      { $set: { name, description, model, km, price, ubication, status, visibility, email, image, message } }
     );
     res.status(200).json({ message: "Producto actualizado correctamente." });
   } catch (error) {

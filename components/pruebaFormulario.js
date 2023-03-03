@@ -29,36 +29,31 @@ export default function Formulario() {
       } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.name)) {
         errors.name = "El nombre solo puede contener letras y espacios";
       }
-      if (!value.model) {
-        errors.model = "Por favor ingresa una marca";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.model)) {
-        errors.model = "El nombre solo puede contener letras y espacios";
-      }
-      if (!value.descripcion) {
-        errors.descripcion = "Por favor ingresa una descripcion";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.descripcion)) {
-        errors.descripcion =
+      if (!value.description) {
+        errors.description = "Por favor ingresa una descripcion";
+      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.description)) {
+        errors.description =
           "La descripcion solo puede contener letras y espacios";
       }
       if (!value.model) {
         errors.model = "Por favor ingresa un modelo";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.model)) {
+      } else if (!/^[a-zA-ZÀ-ÿ0-9\s]{1,40}$/.test(value.model)) {
         errors.model = "El Año del modelo solo puede contener numeros";
       }
       if (!value.km) {
         errors.km = "Por favor ingresa un km";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.km)) {
+      } else if (!/^[a-zA-ZÀ-ÿ0-9\s]{1,40}$/.test(value.km)) {
         errors.km = "El Año del modelo solo puede contener numeros";
       }
-      if (!value.precio) {
-        errors.precio = "Por favor ingresa un precio";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.precio)) {
-        errors.precio = "El nombre solo puede contener letras y espacios";
+      if (!value.price) {
+        errors.price = "Por favor ingresa un precio";
+      } else if (!/^[a-zA-ZÀ-ÿ0-9\s]{1,40}$/.test(value.price)) {
+        errors.price = "El nombre solo puede contener letras y espacios";
       }
-      if (!value.ubicacion) {
-        errors.ubicacion = "Por favor ingresa una ubicación";
-      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.ubicacion)) {
-        errors.ubicacion = "El nombre solo puede contener letras y espacios";
+      if (!value.ubication) {
+        errors.ubication = "Por favor ingresa una ubicación";
+      } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(value.ubication)) {
+        errors.ubication = "El nombre solo puede contener letras y espacios";
       }
       if (!value.email) {
         errors.email = "Por favor ingresa un correo electronico";
@@ -74,6 +69,7 @@ export default function Formulario() {
   const handleSubmit = async (value) => {
     try {
       const result = await uploadFile(file);
+
       console.log(result);
       const dataPost = {
         name: value.name,
@@ -86,6 +82,7 @@ export default function Formulario() {
         message: value.message,
         image: result,
         status: "Draft",
+        visibility: true
       };
       const response = await axios.post('/api/v1/products', dataPost);
       setFormSend(true);
@@ -128,9 +125,9 @@ export default function Formulario() {
                 placeholder="2.8 LS 4x4 CD 16V Turbo Diesel 4P Manual."
               />
               <ErrorMessage
-                name="descripcion"
+                name="description"
                 component={() => (
-                  <div className={styles.error}>{errors.descripcion}</div>
+                  <div className={styles.error}>{errors.description}</div>
                 )}
               />
             </div>
@@ -158,9 +155,9 @@ export default function Formulario() {
               <label htmlFor="price">Precio: (Expresado en USDT) </label>
               <Field type="text" id="price" name="price" placeholder="21500" />
               <ErrorMessage
-                name="precio"
+                name="price"
                 component={() => (
-                  <div className={styles.error}>{errors.precio}</div>
+                  <div className={styles.error}>{errors.price}</div>
                 )}
               />
             </div>
@@ -173,9 +170,9 @@ export default function Formulario() {
                 placeholder="El Chaltén, Santa Cruz, Argentina."
               />
               <ErrorMessage
-                name="ubicacion"
+                name="ubication"
                 component={() => (
-                  <div className={styles.error}>{errors.ubicacion}</div>
+                  <div className={styles.error}>{errors.ubication}</div>
                 )}
               />
             </div>
@@ -188,9 +185,9 @@ export default function Formulario() {
                 placeholder="micorreo@criptocars.com"
               />
               <ErrorMessage
-                name="correo"
+                name="email"
                 component={() => (
-                  <div className={styles.error}>{errors.correo}</div>
+                  <div className={styles.error}>{errors.email}</div>
                 )}
               />
             </div>
