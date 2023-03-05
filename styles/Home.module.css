@@ -299,7 +299,8 @@ margin-bottom: 20px;
   font-size: 12px;
 }
 
-.formulario button[type="submit"] {
+.formulario button[type="submit"],
+.formulario button[type="reset"]{
   display: block;
   background: #ed1848;
   font-weight: 600;
@@ -314,7 +315,8 @@ margin-bottom: 20px;
   transition: 0.3s ease all;
 }
 
-.formulario button[type="submit"]:hover {
+.formulario button[type="submit"]:hover,
+.formulario button[type="reset"]:hover{
   background: #ed1835;
 }
 
