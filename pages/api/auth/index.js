@@ -1,11 +1,9 @@
 import connectToDatabase from "../../../utils/mongodb";
 
-export default async function handler(req, res, address) {
+export default async function handler(req, res) {
   try {
     const { db } = await connectToDatabase();
-    const { id } = req.body;
-    console.log(`Authenticating user ${id} with address ${address}`);
-
+    const { id, address } = req.body;
     const existingUser = await db.collection("users").findOne({ id });
     if (existingUser) {
       await db
@@ -21,16 +19,3 @@ export default async function handler(req, res, address) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
-
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
-  const token = await getToken({ req: context.req });
-  const address = token?.sub ?? null;
-
-  return {
-    props: {
-      address,
-      session,
-    },
-  };
-};

@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import AppBarCC from '../components/ResponsiveAppBar/AppBarCC'
-import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
+import Head from "next/head";
+import AppBarCC from "../components/ResponsiveAppBar/AppBarCC";
+import GeneralFooter from "../components/GeneralFooter/GeneralFooter";
 
 export default function DashboardDelete() {
   return (
@@ -10,8 +10,8 @@ export default function DashboardDelete() {
         <meta name="description" content="criptocars" />
         <link rel="icon" href="/icon.png" />
       </Head>
-      <AppBarCC/>       
-      <GeneralFooter/>
+      <AppBarCC />
+      <GeneralFooter />
     </div>
-  )
+  );
 }
