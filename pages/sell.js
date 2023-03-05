@@ -35,16 +35,24 @@ export default function Sell() {
               si todo está en orden nos comunicaremos con vós y procederemos a
               publicar tu vehículo.
             </p>
+            <br />
+            <br />
+            <br />
+            <p>
+              Si ya contás con una publicación en MercadoLibre de tu auto podés insertar el link
+              en el siguiente formulario y asi se precargará toda la información. Caso contrario
+              seleccioná la carga manual.
+            </p>
             <Formulario />
           </a>
         </div>
       </div>
 
       <div className={styles.container}>
-      <aside> 
-        <HowOperate/>         
-        <GeneralFooter/>
-      </aside> 
+        <aside>
+            <HowOperate/>
+            <GeneralFooter/>
+        </aside>
       </div>
     </div>
   );
