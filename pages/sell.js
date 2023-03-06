@@ -47,8 +47,7 @@ export default function Sell({ address }) {
             {address ? (
               <div>
                 <br />
-                <h3>Logueado como {address}</h3>
-                <Formulario />
+                <Formulario address={address} />
               </div>
             ) : (
               <div>

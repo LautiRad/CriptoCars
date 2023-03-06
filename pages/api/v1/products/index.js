@@ -7,8 +7,8 @@ const handler = nc();
 handler.get(async (req, res) => {
   try {
     const { db } = await connectToDatabase();
-    const vehicles = await db.collection('vehicles').find().toArray();
-    res.status(200).json({vehicles});
+    const vehicles = await db.collection("vehicles").find().toArray();
+    res.status(200).json({ vehicles });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error al obtener los vehiculos." });
@@ -17,16 +17,42 @@ handler.get(async (req, res) => {
 
 // POST /api/v1/products
 handler.post(async (req, res) => {
-    try {
-      const { db } = await connectToDatabase();
-      const { name, description, model, km, price, ubication, status, email, image, message, visibility } = req.body;
-      console.log(req.body);
-      const result = await db.collection('vehicles').insertOne({ name, description, model, km, price, ubication, status, visibility, email, image, message });
-      res.status(200).json({result});
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Error al guardar el vehiculo." });
-    }
+  try {
+    const { db } = await connectToDatabase();
+    const {
+      name,
+      description,
+      model,
+      km,
+      price,
+      ubication,
+      status,
+      email,
+      image,
+      message,
+      visibility,
+      wallet,
+    } = req.body;
+    console.log(req.body);
+    const result = await db.collection("vehicles").insertOne({
+      name,
+      description,
+      model,
+      km,
+      price,
+      ubication,
+      status,
+      visibility,
+      email,
+      image,
+      message,
+      wallet,
     });
+    res.status(200).json({ result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error al guardar el vehiculo." });
+  }
+});
 
 export default handler;
