@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import axios from 'axios'
-import Image from "next/image"
-import { ThemeProvider, createTheme } from "@mui/material/styles"
-import AppBarCC from "../../components/ResponsiveAppBar/AppBarCC"
-import Head from "next/head"
-import styles from '../../styles/CarDetails.module.css'
-import { Grid } from "@mui/material"
-import HowOperate from '../../components/HowOperate/HowOperate'
-import GeneralFooter from '../../components/GeneralFooter/GeneralFooter'
-import ProductProperties from '../../components/Product/ProductProperties'
-import ProductTab from '../../components/Product/ProductTab'
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import axios from "axios";
+import Image from "next/image";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import AppBarCC from "../../components/ResponsiveAppBar/AppBarCC";
+import Head from "next/head";
+import styles from "../../styles/CarDetails.module.css";
+import { Grid } from "@mui/material";
+import HowOperate from "../../components/HowOperate/HowOperate";
+import GeneralFooter from "../../components/GeneralFooter/GeneralFooter";
+import ProductProperties from "../../components/Product/ProductProperties";
+import ProductTab from "../../components/Product/ProductTab";
 import iconUSDT from "../../public/images/iconUSDT.svg";
 import iconTool from "../../assets/svgs/iconTool.svg";
 import Heart from "../../assets/svgs/heart.svg";
@@ -27,9 +28,9 @@ export default function ProductDetails({ vehicle }) {
 
   useEffect(() => {
     fetch(`/api/v1/products/${id}`)
-      .then(response => response.json())
-      .then(data => setData(data.vehicle))
-      .catch(error => console.error(error));
+      .then((response) => response.json())
+      .then((data) => setData(data.vehicle))
+      .catch((error) => console.error(error));
   }, [id]);
 
   const theme = createTheme({
@@ -52,60 +53,74 @@ export default function ProductDetails({ vehicle }) {
           <meta name="description" content="criptocars" />
           <link rel="icon" href="/icon.png" />
         </Head>
-        <AppBarCC /> 
-      {data && (
-        <Grid container spacing={2} p={4}>
-          <Grid item sm={12} md={7}>
-            <Image
-              src={data.image}
-              alt="Autito"
-              width="100%"
-              height="60%"
-              layout="responsive"
-              objectFit="cover"
-              style={{borderRadius:"10px"}}
-            />
-          </Grid>
-          <Grid item sm={12} md={5}>
-        <div className={styles.containerC}>
-          <div className={styles.contentC}>
-            <div className={styles.titlewrapperC}>
-              <div className={styles.leftC}>
-                <Image className={styles.iconC} src={iconTool} alt="icon tool" />
-                <div className={styles.productnameC}>
-                  <p>{data.name}</p>
-                </div>
-              </div>
-              <Image className={styles.iconC} src={Heart} alt="icon heart" />
-            </div>
-            <div className={styles.descriptionC}>
-              <p className={styles.descriptiontextC}>{data.description}</p>
-            </div>
-            <div className={styles.specificationsC}>
-              <p className={styles.specificationyearC}>Modelo: {data.model}</p>{" "}
-              <p className={styles.specificationdistanceC}>{data.km} km</p>{" "}
-            </div>
-            <div className={styles.locationC}>
+        <AppBarCC />
+        {data && (
+          <Grid container spacing={2} p={4}>
+            <Grid item sm={12} md={7}>
               <Image
-                src={MapMaker}
-                className={styles.locationiconC}
-                alt="map marker icon"
+                src={data.image}
+                alt="Autito"
+                width="100%"
+                height="60%"
+                layout="responsive"
+                objectFit="cover"
+                style={{ borderRadius: "10px" }}
               />
-              <p className={styles.locationtextC}>{data.ubication}</p>{" "}
-            </div>
-            <div className={styles.priceC}>
-              <Image
-                className={styles.iconusdtC}
-                src={iconUSDT}
-                alt="icon usdt"
-              />
-              <p className={styles.pricecurrencyC}>USDT</p>
-              <p className={styles.priceamountC}>{data.price}</p>
-            </div>
-            <div className={styles.contactC}>
-              <p className={styles.descriptiontextC}>CONTACTO</p>
-              <div className={styles.contactIcons}>
-                <div className={styles.gmailC}>
+            </Grid>
+            <Grid item sm={12} md={5}>
+              <div className={styles.containerC}>
+                <div className={styles.contentC}>
+                  <div className={styles.titlewrapperC}>
+                    <div className={styles.leftC}>
+                      <Image
+                        className={styles.iconC}
+                        src={iconTool}
+                        alt="icon tool"
+                      />
+                      <div className={styles.productnameC}>
+                        <p>{data.name}</p>
+                      </div>
+                    </div>
+                    <Image
+                      className={styles.iconC}
+                      src={Heart}
+                      alt="icon heart"
+                    />
+                  </div>
+                  <div className={styles.descriptionC}>
+                    <p className={styles.descriptiontextC}>
+                      {data.description}
+                    </p>
+                  </div>
+                  <div className={styles.specificationsC}>
+                    <p className={styles.specificationyearC}>
+                      Modelo: {data.model}
+                    </p>{" "}
+                    <p className={styles.specificationdistanceC}>
+                      {data.km} km
+                    </p>{" "}
+                  </div>
+                  <div className={styles.locationC}>
+                    <Image
+                      src={MapMaker}
+                      className={styles.locationiconC}
+                      alt="map marker icon"
+                    />
+                    <p className={styles.locationtextC}>{data.ubication}</p>{" "}
+                  </div>
+                  <div className={styles.priceC}>
+                    <Image
+                      className={styles.iconusdtC}
+                      src={iconUSDT}
+                      alt="icon usdt"
+                    />
+                    <p className={styles.pricecurrencyC}>USDT</p>
+                    <p className={styles.priceamountC}>{data.price}</p>
+                  </div>
+                  <div className={styles.contactC}>
+                    <p className={styles.descriptiontextC}>CONTACTO</p>
+                    <div className={styles.contactIcons}>
+                      {/* <div className={styles.gmailC}>
                   <Image
                     className={styles.iconGmail}
                     src={iconGmail}
@@ -113,44 +128,50 @@ export default function ProductDetails({ vehicle }) {
                     width="50%"
                     height="50%"
                   />
-                </div>
-                <div className={styles.telegramC}>
-                  <Image
-                    className={styles.iconTelegram}
-                    src={iconTelegram}
-                    alt="icon telegram"
-                    width="50%"
-                    height="50%"
-                  />
+                </div> */}
+                      <Link href="https://t.me/paydece">
+                        <div className={styles.telegramC}>
+                          <Image
+                            className={styles.iconTelegram}
+                            src={iconTelegram}
+                            alt="icon telegram"
+                            width="50%"
+                            height="50%"
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className={styles.contactC}>
+                    <p className={styles.descriptiontextC}>
+                      PAGO POR SMART CONTRACTS
+                    </p>
+                    <Link href="https://app.paydece.io">
+                      <div className={styles.paydece}>
+                        <Image
+                          src={iconPaydece}
+                          alt="icon gmail"
+                          width="250%"
+                          height="80%"
+                        />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.contactC}>
-              <p className={styles.descriptiontextC}>PAGO POR SMART CONTRACTS</p>
-                <div className={styles.paydece}>
-                  <Image
-                    src={iconPaydece}
-                    alt="icon gmail"
-                    width="250%"
-                    height="80%"
-                  />
-                </div>
-            </div>
-          </div>
-        </div>
-        </Grid>
-          <ProductProperties properties={data}/>
-          <ProductTab properties={data}/>
-        </Grid>
+            </Grid>
+            <ProductProperties properties={data} />
+            <ProductTab properties={data} />
+          </Grid>
         )}
 
-        <aside> 
-          <HowOperate/>
-          <GeneralFooter/>
+        <aside>
+          <HowOperate />
+          <GeneralFooter />
         </aside>
-      </div> 
+      </div>
     </ThemeProvider>
-      );
+  );
 }
 
 // export async function getServerSideProps({ params }) {
