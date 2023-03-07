@@ -7,7 +7,11 @@ const nextConfig = {
     TOKEN: process.env.TOKEN,
   },
   images: {
-    domains: ["localhost", "firebasestorage.googleapis.com"],
+    domains: [
+      "localhost",
+      "firebasestorage.googleapis.com",
+      "http2.mlstatic.com",
+    ],
   },
 };
 
