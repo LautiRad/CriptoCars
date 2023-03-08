@@ -11,6 +11,7 @@ export default async function handler(req, res) {
         .updateOne({ id }, { $set: { authenticated: true, address } });
       res.status(200).json({ message: "User authenticated successfully" });
     } else {
+      const nonce = Math.random().toString(36).slice(2);
       await db.collection("users").insertOne({ id, address });
       res.status(200).json({ message: "User created successfully", nonce });
     }

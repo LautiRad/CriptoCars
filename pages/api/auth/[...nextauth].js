@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getCsrfToken } from "next-auth/react";
 import { SiweMessage } from "siwe";
 
 const getProviders = (serverNonce, address) => [
@@ -17,7 +18,7 @@ const getProviders = (serverNonce, address) => [
         placeholder: "0x0",
       },
     },
-    async authorize(credentials) {
+    async authorize(credentials, req) {
       try {
         const siwe = new SiweMessage(JSON.parse(credentials?.message || "{}"));
         const nextAuthUrl = new URL(process.env.NEXTAUTH_URL);
@@ -25,7 +26,8 @@ const getProviders = (serverNonce, address) => [
         const result = await siwe.verify({
           signature: credentials?.signature || "",
           domain: nextAuthUrl.host,
-          nonce: serverNonce,
+          nonce: await getCsrfToken({ req }),
+          // nonce: serverNonce,
         });
 
         if (result.success) {
@@ -63,6 +65,7 @@ const auth = async (req, res) => {
       callbacks: {
         async session({ session, token }) {
           session.address = token.sub;
+          session.user.name = token.sub;
           return session;
         },
       },
