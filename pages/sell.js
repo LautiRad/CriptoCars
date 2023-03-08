@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import AppBarCC from "../components/ResponsiveAppBar/AppBarCC";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Formulario from "../components/pruebaFormulario";
 import HowOperate from "../components/HowOperate/HowOperate";
 import GeneralFooter from "../components/GeneralFooter/GeneralFooter";
-import { getSession } from "next-auth/react";
+import {getSession, useSession} from "next-auth/react";
 import { getToken } from "next-auth/jwt";
 
 export default function Sell({ address }) {
+  const { status } = useSession()
+
   return (
     <div>
       <Head>
@@ -44,7 +46,7 @@ export default function Sell({ address }) {
               insertar el link en el siguiente formulario y asi se precargará
               toda la información. Caso contrario seleccioná la carga manual.
             </p>
-            {address ? (
+            {status==='authenticated' ? (
               <div>
                 <br />
                 <Formulario address={address} />

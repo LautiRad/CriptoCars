@@ -10,6 +10,7 @@ import { Grid } from "@mui/material"
 import LogoNegro from '../public/images/fullNegro.png'
 import HowOperate from '../components/HowOperate/HowOperate'
 import GeneralFooter from '../components/GeneralFooter/GeneralFooter'
+import LoadingSpinner from "../components/Loading/LoadingSpinner";
 
 export default function Products() {
   const theme = createTheme({
@@ -25,12 +26,15 @@ export default function Products() {
   });
 
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true)
     async function fetchData() {
       const res = await fetch("/api/v1/products");
       const data = await res.json();
       setData(data.vehicles);
+      setIsLoading(false)
     }
 
     fetchData();
@@ -44,16 +48,19 @@ export default function Products() {
           <meta name="description" content="criptocars" />
           <link rel="icon" href="/icon.png" />
         </Head>
-        <AppBarCC /> 
-        <div className={styles.ProductsAll}>
-          {/* <ProductCard /> */}
-            <Grid container spacing={2}>
-              {data &&
-                data.filter(element => element.visibility).map((element) => {
-                  return <ProductCard key={element.id} {...element} />;
-                })}
-            </Grid>
-        </div>
+        <AppBarCC />
+        <div>
+          {isLoading ? <LoadingSpinner />:
+          <div className={styles.ProductsAll}>
+            {/* <ProductCard /> */}
+              <Grid container spacing={2}>
+                {data &&
+                  data.filter(element => element.visibility).map((element) => {
+                    return <ProductCard key={element.id} {...element} />;
+                  })}
+              </Grid>
+          </div>
+        }</div>
         <aside> 
         <HowOperate/>         
         <GeneralFooter/>
