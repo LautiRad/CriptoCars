@@ -1,17 +1,46 @@
-import { Container, Stack, Typography } from '@mui/material';
-import CarList from '../components/Backoffice/Cars/CarList.js';
-import Header from '../components/Backoffice/Header/Header.js';
+import { Container, Stack, Typography } from "@mui/material";
+import CarList from "../components/Backoffice/Cars/CarList.js";
+import Header from "../components/Backoffice/Header/Header.js";
+import { getSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
+import { useRouter } from "next/router";
 
-export default function CarPage() {
-    return (
-        <>
-            <Header />
-            <Container sx={{ display: { xs: "block", md: "block"}}}>
-                <Typography variant="h4" sx={{ mb: 5 , mt: 5    }}>
-                    Cars
-                </Typography>
-                <CarList />
-            </Container>
-        </>
-    );
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+  const token = await getToken({ req: context.req });
+  const address = token?.sub ?? null;
+  const allowedWallets = process.env.ALLOWED_WALLETS.split(",");
+
+  if (!allowedWallets.includes(address)) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      address,
+      session,
+      allowedWallets,
+    },
+  };
+};
+
+export default function CarPage({ address, allowedWallets }) {
+  const router = useRouter();
+  const isAllowedUser = allowedWallets.includes(address);
+  return (
+    <>
+      <Header />
+      <Container sx={{ display: { xs: "block", md: "block" } }}>
+        <Typography variant="h4" sx={{ mb: 5, mt: 5 }}>
+          Cars
+        </Typography>
+        <CarList />
+      </Container>
+    </>
+  );
 }

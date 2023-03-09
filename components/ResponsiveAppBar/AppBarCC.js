@@ -174,7 +174,7 @@ const AppBarCC = () => {
                   marginRight: "16px",
                 }}
               >
-                {/* <Typography
+                <Typography
                   variant="span"
                   textAlign="center"
                   onClick={() => redirect("/")}
@@ -204,7 +204,7 @@ const AppBarCC = () => {
                   }}
                 >
                   <PermIdentityIcon sx={{ fontSize: "18px" }} />
-                </Typography> */}
+                </Typography>
               </Box>
             </Box>
             <Rainbow />

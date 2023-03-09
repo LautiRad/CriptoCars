@@ -160,8 +160,8 @@ export default function ProductDetails({ vehicle }) {
                 </div>
               </div>
             </Grid>
-            <ProductProperties properties={data} />
-            <ProductTab properties={data} />
+            {/* <ProductProperties properties={data} />
+            <ProductTab properties={data} /> */}
           </Grid>
         )}
 
@@ -173,20 +173,3 @@ export default function ProductDetails({ vehicle }) {
     </ThemeProvider>
   );
 }
-
-// export async function getServerSideProps({ params }) {
-//   const { db } = await connectToDatabase();
-//   const { id } = params;
-//   const data = await db.collection('vehicles').findOne({ _id: ObjectId(id) });
-
-//   if (!data) {
-//     return {
-//       notFound: true
-//     }
-//   }
-//   return {
-//     props: {
-//       product: JSON.parse(JSON.stringify(data))
-//     }
-//   }
-// }
