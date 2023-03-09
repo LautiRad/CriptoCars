@@ -331,6 +331,17 @@ margin-bottom: 20px;
   width: auto;
 }
 
+.modalButton {
+  margin-left: 33%;
+  background: #ed1848;
+  font-weight: 600;
+  font-family: Open Sans, sans-serif;
+}
+
+.modalButton:hover {
+  background: #ed1848;
+}
+
 /* Articulos Destacados */
 
 .containerC {
