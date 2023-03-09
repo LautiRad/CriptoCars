@@ -31,8 +31,8 @@ const theme = createTheme({
 });
 
 const pages = [
-  { name: "Vehículos", url: "./" },
-  { name: "Vender", url: "./sell" },
+  { name: "Vehículos", url: "/" },
+  { name: "Vender", url: "/sell" },
   { name: "Ayuda", url: "/#faQ" },
 ];
 
