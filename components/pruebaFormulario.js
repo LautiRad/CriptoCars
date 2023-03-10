@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
@@ -6,11 +6,33 @@ import { uploadFile } from "./firebase";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 350,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  borderRadius: '10px',
+  boxShadow: 24,
+  p: 3,
+};
 
 export default function Formulario({ address }) {
+  const myRef = useRef(null)
+
   const [formSend, setFormSend] = useState(false);
   const [file, setFile] = useState(null);
   const [load, setLoad] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const ImgStyled = styled("img")(({ theme }) => ({
     width: "50%",
@@ -54,6 +76,7 @@ export default function Formulario({ address }) {
 
   const handleSubmitML = async (value) => {
     setLoad(false);
+
     let productId = value.link.split("-")[1];
     const response = await axios.get(
       "https://api.mercadolibre.com/items/MLA" + productId
@@ -76,7 +99,7 @@ export default function Formulario({ address }) {
       valueFromMap(map.get("BRAND"), "value") +
       " " +
       valueFromMap(map.get("MODEL"), "value");
-    initialValues.model = valueFromMap(map.get("VEHICLE_YEAR"), "value");
+    initialValues.model = Number(valueFromMap(map.get("VEHICLE_YEAR"), "value"));
     initialValues.km =
       map.get("KILOMETERS") === undefined
         ? ""
@@ -96,10 +119,13 @@ export default function Formulario({ address }) {
       valueFromMap(map.get("DOORS"), "name");
     initialValues.image = response.data.pictures[0].url;
     setLoad(true);
+
+    myRef.current.scrollIntoView()
   };
 
   const manualLoad = async () => {
     setLoad(true);
+    myRef.current.scrollIntoView()
   };
 
   const validate = (value) => {
@@ -146,6 +172,10 @@ export default function Formulario({ address }) {
     }
     return errors;
   };
+
+  const handleClick = (errors, isSubmitting) => {
+    if(isSubmitting && errors) handleOpen();
+  }
 
   const handleSubmit = async (value) => {
     try {
@@ -215,162 +245,181 @@ export default function Formulario({ address }) {
           </Form>
         )}
       </Formik>
-      {load && (
-        <Formik
-          initialValues={initialValues}
-          validate={validate}
-          onSubmit={handleSubmit}
-          enableReinitialize
-        >
-          {({ errors, handleSubmit, setFieldValue }) => (
-            <form onSubmit={handleSubmit} className={styles.formulario}>
-              <div>
-                <label htmlFor="name">Marca y Modelo:</label>
-                <Field
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Chevrolet S10"
-                />
-                <ErrorMessage
-                  name="name"
-                  component={() => (
-                    <div className={styles.error}>{errors.name}</div>
-                  )}
-                />
-              </div>
-              <div>
-                <label htmlFor="description">Breve Descripción: </label>
-                <Field
-                  type="text"
-                  id="description"
-                  name="description"
-                  placeholder="2.8 LS 4x4 CD 16V Turbo Diesel 4P Manual."
-                />
-                <ErrorMessage
-                  name="description"
-                  component={() => (
-                    <div className={styles.error}>{errors.description}</div>
-                  )}
-                />
-              </div>
-              <div>
-                <label htmlFor="">Año: </label>
-                <Field
-                  type="number"
-                  id="model"
-                  name="model"
-                  placeholder="2021"
-                />
-                <ErrorMessage
-                  name="model"
-                  component={() => (
-                    <div className={styles.error}>{errors.model}</div>
-                  )}
-                />
-              </div>
-              <div>
-                <label htmlFor="km">Kilometraje: </label>
-                <Field type="number" id="km" name="km" placeholder="35000" />
-                <ErrorMessage
-                  name="km"
-                  component={() => (
-                    <div className={styles.error}>{errors.km}</div>
-                  )}
-                />
-              </div>
-              <div>
-                <label htmlFor="price">Precio: (Expresado en USDT) </label>
-                <Field
-                  type="text"
-                  id="price"
-                  name="price"
-                  placeholder="21500"
-                />
-                <ErrorMessage
-                  name="price"
-                  component={() => (
-                    <div className={styles.error}>{errors.price}</div>
-                  )}
-                />
-              </div>
-              <div>
-                <label htmlFor="ubication">Ubicación: </label>
-                <Field
-                  type="text"
-                  id="ubication"
-                  name="ubication"
-                  placeholder="El Chaltén, Santa Cruz, Argentina."
-                />
-                <ErrorMessage
-                  name="ubication"
-                  component={() => (
-                    <div className={styles.error}>{errors.ubication}</div>
-                  )}
-                />
-              </div>
-              <div>
-                <label htmlFor="email">Mail de contacto: </label>
-                <Field
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="micorreo@criptocars.com"
-                />
-                <ErrorMessage
-                  name="email"
-                  component={() => (
-                    <div className={styles.error}>{errors.email}</div>
-                  )}
-                />
-              </div>
-              {initialValues.image != "" && (
+      <div ref={myRef}>
+        {load && (
+          <Formik
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={handleSubmit}
+            enableReinitialize
+          >
+            {({ errors, handleSubmit, isSubmitting  }) => (
+              <form onSubmit={handleSubmit} className={styles.formulario}>
                 <div>
-                  <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <ImgStyled src={initialValues.image} alt="Car Pic" />
-                    </Box>
-                  </Grid>
-                </div>
-              )}
-              {initialValues.image == "" && (
-                <div>
-                  <label htmlFor="image">Imagen: </label>
-                  <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    accept="image/*"
-                    onChange={(value) => setFile(value.currentTarget.files[0])}
+                  <label htmlFor="name">Marca y Modelo:</label>
+                  <Field
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Chevrolet S10"
+                  />
+                  <ErrorMessage
+                    name="name"
+                    component={() => (
+                      <div className={styles.error}>{errors.name}</div>
+                    )}
                   />
                 </div>
-              )}
-              <div>
-                <Field
-                  name="message"
-                  as="textarea"
-                  placeholder="Mensaje o comentario que quieras agregar.."
-                />
-              </div>
-              <div>
-                <label htmlFor="wallet"> Wallet </label>
-                <Field
-                  value={address}
-                  type="text"
-                  id="wallet"
-                  name="wallet"
-                  placeholder=""
-                />
-              </div>
-
-              <button type="submit">Enviar</button>
-              {formSend && (
-                <p className={styles.exito}>Formulario enviado con exito!</p>
-              )}
-            </form>
-          )}
-        </Formik>
-      )}
+                <div>
+                  <label htmlFor="description">Breve Descripción:</label>
+                  <Field
+                    type="text"
+                    id="description"
+                    name="description"
+                    placeholder="2.8 LS 4x4 CD 16V Turbo Diesel 4P Manual."
+                  />
+                  <ErrorMessage
+                    name="description"
+                    component={() => (
+                      <div className={styles.error}>{errors.description}</div>
+                    )}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="">Año: </label>
+                  <Field
+                    type="number"
+                    id="model"
+                    name="model"
+                    placeholder="2021"
+                  />
+                  <ErrorMessage
+                    name="model"
+                    component={() => (
+                      <div className={styles.error}>{errors.model}</div>
+                    )}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="km">Kilometraje: </label>
+                  <Field type="number" id="km" name="km" placeholder="35000" />
+                  <ErrorMessage
+                    name="km"
+                    component={() => (
+                      <div className={styles.error}>{errors.km}</div>
+                    )}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="price">Precio: (Expresado en USDT) </label>
+                  <Field
+                    type="text"
+                    id="price"
+                    name="price"
+                    placeholder="21500"
+                  />
+                  <ErrorMessage
+                    name="price"
+                    component={() => (
+                      <div className={styles.error}>{errors.price}</div>
+                    )}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="ubication">Ubicación: </label>
+                  <Field
+                    type="text"
+                    id="ubication"
+                    name="ubication"
+                    placeholder="El Chaltén, Santa Cruz, Argentina."
+                  />
+                  <ErrorMessage
+                    name="ubication"
+                    component={() => (
+                      <div className={styles.error}>{errors.ubication}</div>
+                    )}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email">Mail de contacto: </label>
+                  <Field
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="micorreo@criptocars.com"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component={() => (
+                      <div className={styles.error}>{errors.email}</div>
+                    )}
+                  />
+                </div>
+                {initialValues.image != "" && (
+                  <div>
+                    <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <ImgStyled src={initialValues.image} alt="Car Pic" />
+                      </Box>
+                    </Grid>
+                  </div>
+                )}
+                {initialValues.image == "" && (
+                  <div>
+                    <label htmlFor="image">Imagen: </label>
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      accept="image/*"
+                      onChange={(value) => setFile(value.currentTarget.files[0])}
+                    />
+                  </div>
+                )}
+                <div>
+                  <Field
+                    name="message"
+                    as="textarea"
+                    placeholder="Mensaje o comentario que quieras agregar.."
+                  />
+                </div>
+                <div>
+                  <label htmlFor="wallet"> Wallet </label>
+                  <Field
+                    value={address}
+                    type="text"
+                    id="wallet"
+                    name="wallet"
+                    placeholder=""
+                  />
+                </div>
+                <button onClick={handleClick(isSubmitting, errors)} type="submit">Enviar</button>
+                {formSend && (
+                  <p className={styles.exito}>Formulario enviado con exito!</p>
+                )}
+              </form>
+            )}
+          </Formik>
+        )}
+      </div>
+      <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Container>
+            <Typography id="modal-modal-title" variant="h6" component="h3" sx={{    textAlign: "center", fontFamily:"Montserrat", fontSize: "1.15rem"  }}>
+              Por favor, completá todos los datos solicitados.
+            </Typography>
+            <br/>
+            <Button onClick={handleClose} variant='contained' className={styles.modalButton} sx={{ marginLeft: "33%", background: "#ed1848" ,fontWeight: "600", fontFamily: "Open Sans, sans-serif"}}>
+              ACEPTAR
+            </Button>
+          </Container>
+        </Box>
+      </Modal>
     </>
   );
 }
