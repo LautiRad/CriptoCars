@@ -7,8 +7,7 @@ import { useRouter } from "next/router";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  const token = await getToken({ req: context.req });
-  const address = token?.sub ?? null;
+  const address = session?.address ?? null;
   const allowedWallets = process.env.ALLOWED_WALLETS.split(",");
 
   if (!allowedWallets.includes(address)) {
@@ -23,7 +22,6 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       address,
-      session,
       allowedWallets,
     },
   };

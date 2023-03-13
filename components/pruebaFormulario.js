@@ -173,8 +173,10 @@ export default function Formulario({ address }) {
     return errors;
   };
 
-  const handleClick = (errors, isSubmitting) => {
-    if(isSubmitting && errors) handleOpen();
+  const handleClick = (isSubmitting, errors) => {
+    if(isSubmitting && Object.keys(errors).length != 0){
+      handleOpen();
+    }
   }
 
   const handleSubmit = async (value) => {

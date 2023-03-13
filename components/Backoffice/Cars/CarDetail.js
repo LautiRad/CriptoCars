@@ -13,11 +13,15 @@ import InputLabel from '@mui/material/InputLabel'
 import CardContent from '@mui/material/CardContent'
 import Container from '@mui/material/Container'
 import FormControl from '@mui/material/FormControl'
+import Switch from '@mui/material/Switch'
 import Button from '@mui/material/Button'
 import {useRouter} from "next/router";
 import {useEffect} from "react";
 import axios from "axios";
 import Modal from '@mui/material/Modal';
+
+import { uploadFile } from "../../firebase";
+import LoadingSpinner from "../../Loading/LoadingSpinner";
 
 const ImgStyled = styled('img')(({ theme }) => ({
     width: '50%',
@@ -59,21 +63,6 @@ const CarDetail = () => {
     // ** State
     const [openAlert, setOpenAlert] = useState(true)
     const [imgSrc, setImgSrc] = useState('')
-
-    const onChange = file => {
-        const reader = new FileReader()
-        const { files } = file.target
-        if (files && files.length !== 0) {
-            reader.onload = () => setImgSrc(reader.result)
-            reader.readAsDataURL(files[0])
-        }
-    }
-
-    const handleDelete = async () => {
-        const get = await axios.delete(`/api/v1/products/${id}`)
-        window.location.href = '/backoffice';
-    };
-
     const router = useRouter();
     const API_URL = process.env.API_URL;
     const TOKEN = process.env.TOKEN;
@@ -82,22 +71,59 @@ const CarDetail = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [file, setFile] = useState(null);
+
+    const onChange = async file => {
+        const reader = new FileReader()
+        const { files } = file.target
+        if (files && files.length !== 0) {
+            reader.onload = () => setImgSrc(reader.result)
+            reader.readAsDataURL(files[0])
+            setFile(files[0])
+
+        }
+    }
+
+    const handleDelete = async () => {
+        const get = await axios.delete(`/api/v1/products/${id}`)
+        window.location.href = '/backoffice';
+    };
+
+    const handleSubmit = async () => {
+        setIsLoading(true);
+        let result = await uploadFile(file);
+        data.image = result
+        // console.log(result)
+        const put = await axios.put(`/api/v1/products/${id}`, data)
+        setIsLoading(false);
+    }
+
+    const _change=(event, value)=>{
+        setData((data) => Object.assign({}, data, { [event.target.name]: event.target.value }));
+    }
+
+    const _changevisibility=(event, value)=>{
+
+        setData((data) => Object.assign({}, data, { visibility: !data.visibility }));
+    }
 
     useEffect(() => {
         const fetchDetails = async () => {
             if(!id) {
                 return;
             }
-            // alert("asd")
 
             try {
+                setIsLoading(true);
+
                 const get = await axios({
                     method: "get",
                     url: `/api/v1/products/${id}`,
                 });
                 setData(get.data.vehicle);
                 setImgSrc(get.data.vehicle.image)
-                console.log(get.data.vehicle.image);
+                setIsLoading(false);
             } catch (error) {
                 console.log(error);
             }
@@ -107,7 +133,7 @@ const CarDetail = () => {
 
     return (
         <Container>
-            {data && (<CardContent>
+            {data && !isLoading  && (<CardContent>
                 <form>
                     <Grid container spacing={7}>
                         <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
@@ -119,9 +145,10 @@ const CarDetail = () => {
                                         <input
                                             hidden
                                             type='file'
-                                            onChange={onChange}
-                                            accept='image/png, image/jpeg'
+                                            accept="image/*"
                                             id='car-upload-image'
+                                            onChange={onChange}
+
                                         />
                                     </ButtonStyled>
                                     <ResetButtonStyled color='error' variant='outlined' onClick={() => setImgSrc('/images/avatars/1.png')}>
@@ -133,15 +160,21 @@ const CarDetail = () => {
                                 </Box>
                             </Box>
                         </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Nombre' value={data.name} />
+                        <Grid item xs={12} sm={12}>
+                            Habilitado
+                            <Switch
+                                checked={data.visibility}
+                                onChange={_changevisibility}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Modelo' value={data.model} />
+                            <TextField fullWidth name="name" label='Nombre' value={data.name} onChange={_change}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Breve Descripción' value={data.description} />
+                            <TextField fullWidth name="model" label='Modelo' value={data.model} onChange={_change}/>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <TextField fullWidth name="description" label='Breve Descripción' value={data.description} onChange={_change}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -149,24 +182,21 @@ const CarDetail = () => {
                                 type='email'
                                 label='Email'
                                 value={data.email}
+                                name="email"
+                                onChange={_change}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <FormControl fullWidth>
-                                <InputLabel>Status</InputLabel>
-                                <Select label='Status' defaultValue='active'>
-                                    <MenuItem value='draft'>Draft</MenuItem>
-                                    <MenuItem value='draft'>Draft</MenuItem>
-                                    <MenuItem value='draft'>Draft</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <TextField fullWidth label='Precio' value={data.price} name="price" onChange={_change}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField fullWidth label='Precio' value={data.price} />
+                            <TextField fullWidth label='Ubicacion' value={data.ubication} name="ubication" onChange={_change}/>
                         </Grid>
-
+                        <Grid item xs={12} sm={6}>
+                            <TextField fullWidth label='Km' value={data.km} name="km" onChange={_change}/>
+                        </Grid>
                         <Grid item xs={12}>
-                            <Button variant='contained' sx={{ marginRight: 3.5 }}>
+                            <Button onClick={handleSubmit} variant='contained' sx={{ marginRight: 3.5 }}>
                                 Save Changes
                             </Button>
                             <Button type='reset' variant='outlined' color='secondary'>
@@ -200,6 +230,7 @@ const CarDetail = () => {
                     </Box>
                 </Modal>
             </CardContent>)}
+            {isLoading && <div><LoadingSpinner /></div>}
         </Container>
 
     )
