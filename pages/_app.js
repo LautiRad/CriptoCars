@@ -7,12 +7,10 @@ import { SessionProvider } from "next-auth/react";
 import { wagmiClient, chains } from "./api/web3";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
 import { getSession } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  const token = await getToken({ req: context.req });
-  const address = token?.sub ?? null;
+  const address = session?.address ?? null;
 
   return {
     props: {
