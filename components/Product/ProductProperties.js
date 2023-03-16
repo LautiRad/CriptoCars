@@ -4,6 +4,8 @@ import styles from '../../styles/CarDetails.module.css'
 
 function ProductProperties({properties}) {
   const map = new Map(Object.entries(JSON.parse(properties.attributes)));
+  console.log(map)
+
   return (
     <Grid item sm={12} md={7} className={styles.detailsC}>
       <div className={styles.tabs}>
@@ -74,12 +76,12 @@ function ProductProperties({properties}) {
             {map.get("TRANSMISSION").value}
           </p>
         </div>}
-        {map.get("VEHICLE_TYPE") && <div className={styles.propertiesC}>
+        {map.get("VEHICLE_BODY_TYPE") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Tipo de carrocería
           </p>
           <p className={styles.propertiesTextC}>
-            {map.get("VEHICLE_TYPE").value}
+            {map.get("VEHICLE_BODY_TYPE").value}
           </p>
         </div>}
         {map.get("KILOMETERS") && <div className={styles.propertiesC}>
