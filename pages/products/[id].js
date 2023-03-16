@@ -27,6 +27,8 @@ export default function ProductDetails({ vehicle }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    if(id==undefined)
+      return
     fetch(`/api/v1/products/${id}`)
       .then((response) => response.json())
       .then((data) => setData(data.vehicle))
@@ -160,8 +162,8 @@ export default function ProductDetails({ vehicle }) {
                 </div>
               </div>
             </Grid>
-            {/* <ProductProperties properties={data} />
-            <ProductTab properties={data} /> */}
+            {data.attributes && <ProductProperties properties={data} />}
+            {/*<ProductTab properties={data} /> *!/*/}
           </Grid>
         )}
 

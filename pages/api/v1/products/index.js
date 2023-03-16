@@ -31,6 +31,7 @@ handler.post(async (req, res) => {
       image,
       message,
       visibility,
+      attributes,
       wallet,
     } = req.body;
     console.log(req.body);
@@ -46,6 +47,7 @@ handler.post(async (req, res) => {
       email,
       image,
       message,
+      attributes,
       wallet,
     });
     res.status(200).json({ result });

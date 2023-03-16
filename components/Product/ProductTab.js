@@ -51,12 +51,12 @@ export default function ProductTab({properties}) {
             <TabPanel value={value} index={0}>
                 <ProductInfo properties={properties}/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
+            {/*<TabPanel value={value} index={1}>*/}
+            {/*    Item Two*/}
+            {/*</TabPanel>*/}
+            {/*<TabPanel value={value} index={2}>*/}
+            {/*    Item Three*/}
+            {/*</TabPanel>*/}
         </Box>
     );
 }

@@ -3,100 +3,101 @@ import {Grid} from "@mui/material";
 import styles from '../../styles/CarDetails.module.css'
 
 function ProductProperties({properties}) {
+  const map = new Map(Object.entries(JSON.parse(properties.attributes)));
   return (
     <Grid item sm={12} md={7} className={styles.detailsC}>
       <div className={styles.tabs}>
         <h1 className={styles.title}>Características Principales</h1>
       </div>
       <div className={styles.containerPropertiesC}>
-        <div className={styles.propertiesC}>
+        {map.get("BRAND") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Marca
           </p>
           <p className={styles.propertiesTextC}>
-            Fiat
+            {map.get("BRAND").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("MODEL") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Modelo
           </p>
           <p className={styles.propertiesTextC}>
-            Toro
+            {map.get("MODEL").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("TRIM") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Version
           </p>
           <p className={styles.propertiesTextC}>
-            Volcano
+            {map.get("TRIM").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("VEHICLE_YEAR") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Año
           </p>
           <p className={styles.propertiesTextC}>
-            2016
+            {map.get("VEHICLE_YEAR").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("COLOR") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Color
           </p>
           <p className={styles.propertiesTextC}>
-            Bordó
+            {map.get("COLOR").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("FUEL_TYPE") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Tipo de combustible
           </p>
           <p className={styles.propertiesTextC}>
-            Diesel
+            {map.get("FUEL_TYPE").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("DOORS") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Puertas
           </p>
           <p className={styles.propertiesTextC}>
-            4
+            {map.get("DOORS").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("TRANSMISSION") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Transmisión
           </p>
           <p className={styles.propertiesTextC}>
-            Automático
+            {map.get("TRANSMISSION").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("VEHICLE_TYPE") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Tipo de carrocería
           </p>
           <p className={styles.propertiesTextC}>
-            Pick up
+            {map.get("VEHICLE_TYPE").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("KILOMETERS") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Kilometraje
           </p>
           <p className={styles.propertiesTextC}>
-            92.000
+            {map.get("KILOMETERS").value}
           </p>
-        </div>
-        <div className={styles.propertiesC}>
+        </div>}
+        {map.get("ENGINE") && <div className={styles.propertiesC}>
           <p className={styles.propertiesTitleC}>
             Motor
           </p>
           <p className={styles.propertiesTextC}>
-            2.0
+            {map.get("ENGINE").value}
           </p>
-        </div>
+        </div>}
       </div>
     </Grid>
   );
