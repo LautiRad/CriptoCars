@@ -20,18 +20,22 @@ import iconGmail from "../../assets/svgs/gmail.svg";
 import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
 import Button from "@mui/material/Button";
+import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 
 export default function ProductDetails({ vehicle }) {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if(id==undefined)
       return
+    setIsLoading(true);
     fetch(`/api/v1/products/${id}`)
       .then((response) => response.json())
       .then((data) => setData(data.vehicle))
+      .then(() => setIsLoading(false))
       .catch((error) => console.error(error));
   }, [id]);
 
@@ -162,10 +166,16 @@ export default function ProductDetails({ vehicle }) {
                 </div>
               </div>
             </Grid>
-            {data.attributes && <ProductProperties properties={data} />}
-            {/*<ProductTab properties={data} /> *!/*/}
+            {data.attributes && (
+              <Grid container sx={{paddingLeft: "16px"}}>
+                <ProductProperties properties={data} ></ProductProperties>
+                <ProductTab properties={data}></ProductTab>
+              </Grid>
+            )}
+
           </Grid>
         )}
+        {isLoading && <div><LoadingSpinner /></div>}
 
         <aside>
           <HowOperate />

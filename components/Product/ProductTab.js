@@ -44,8 +44,8 @@ export default function ProductTab({properties}) {
             <Box className={styles.productBoxHeader}>
                 <Tabs value={value} onChange={handleChange} variant="scrollable" allowScrollButtonsMobile>
                     <Tab className={styles.productTab} label="Información General" {...a11yProps(0)} />
-                    <Tab className={styles.productTab} label="Rendimiento y dimensiones" {...a11yProps(1)} />
-                    <Tab className={styles.productTab} label="Seguridad" {...a11yProps(2)} />
+                    {/*<Tab className={styles.productTab} label="Rendimiento y dimensiones" {...a11yProps(1)} />*/}
+                    {/*<Tab className={styles.productTab} label="Seguridad" {...a11yProps(2)} />*/}
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
