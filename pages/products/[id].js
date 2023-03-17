@@ -166,7 +166,7 @@ export default function ProductDetails({ vehicle }) {
                 </div>
               </div>
             </Grid>
-            {/*{data.attributes && (*/}
+            {data.attributes && (
               <Grid container sx={{paddingLeft: "16px"}}>
                 <ProductProperties properties={data} ></ProductProperties>
                 <ProductTab properties={data}></ProductTab>
