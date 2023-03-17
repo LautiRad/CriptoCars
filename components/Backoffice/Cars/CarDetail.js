@@ -81,7 +81,6 @@ const CarDetail = () => {
             reader.onload = () => setImgSrc(reader.result)
             reader.readAsDataURL(files[0])
             setFile(files[0])
-
         }
     }
 
@@ -92,9 +91,10 @@ const CarDetail = () => {
 
     const handleSubmit = async () => {
         setIsLoading(true);
-        let result = await uploadFile(file);
-        data.image = result
-        // console.log(result)
+        if(file!=null){
+            let result = await uploadFile(file);
+            data.image = result
+        }
         const put = await axios.put(`/api/v1/products/${id}`, data)
         setIsLoading(false);
     }

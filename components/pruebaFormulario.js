@@ -118,6 +118,8 @@ export default function Formulario({ address }) {
       valueFromMap(map.get("DOORS"), "value") +
       valueFromMap(map.get("DOORS"), "name");
     initialValues.image = response.data.pictures[0].url;
+    initialValues.attributes = JSON.stringify(Object.fromEntries(map));
+
     setLoad(true);
 
     myRef.current.scrollIntoView()
@@ -201,6 +203,7 @@ export default function Formulario({ address }) {
         image: result,
         status: "Draft",
         visibility: false,
+        attributes: initialValues.attributes,
         wallet: address,
       };
       const response = await axios.post("/api/v1/products", dataPost);
