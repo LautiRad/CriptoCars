@@ -19,9 +19,13 @@ import {useRouter} from "next/router";
 import {useEffect} from "react";
 import axios from "axios";
 import Modal from '@mui/material/Modal';
+import Image from "next/image";
+
 
 import { uploadFile } from "../../firebase";
 import LoadingSpinner from "../../Loading/LoadingSpinner";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ImgStyled = styled('img')(({ theme }) => ({
     width: '50%',
@@ -73,6 +77,7 @@ const CarDetail = () => {
     const handleClose = () => setOpen(false);
     const [isLoading, setIsLoading] = useState(false);
     const [file, setFile] = useState(null);
+    const [carousel, setCarousel] = useState([]);
 
     const onChange = async file => {
         const reader = new FileReader()
@@ -104,7 +109,6 @@ const CarDetail = () => {
     }
 
     const _changevisibility=(event, value)=>{
-
         setData((data) => Object.assign({}, data, { visibility: !data.visibility }));
     }
 
@@ -116,12 +120,33 @@ const CarDetail = () => {
 
             try {
                 setIsLoading(true);
+                carousel = [];
 
                 const get = await axios({
                     method: "get",
                     url: `/api/v1/products/${id}`,
                 });
                 setData(get.data.vehicle);
+                let images = [];
+                if(Array.isArray(get.data.vehicle.image)){
+                    images = get.data.vehicle.image;
+                }else {
+                    images.push(get.data.vehicle.image);
+                }
+                images.forEach((image, index) => {
+                  carousel.push(
+                      <Image
+                          src={image}
+                          alt="Autito"
+                          width="100%"
+                          height="60%"
+                          layout="responsive"
+                          objectFit="cover"
+                          style={{ borderRadius: "10px"}}
+                      />
+                  );
+                });
+                setCarousel(carousel)
                 setImgSrc(get.data.vehicle.image)
                 setIsLoading(false);
             } catch (error) {
@@ -138,8 +163,13 @@ const CarDetail = () => {
                     <Grid container spacing={7}>
                         <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                {data.image != null && (<ImgStyled src={imgSrc} alt='Car Pic' />)}
-                                <Box>
+                                {/*{data.image != null && (<ImgStyled src={imgSrc} alt='Car Pic' />)}*/}
+                                <Grid item sm={12} md={7}>
+                                  <Carousel showStatus={false}  showThumbs={false}>
+                                    {carousel}
+                                  </Carousel>
+                                </Grid>
+                                <Box sx={{paddingLeft:"20px"}}>
                                     <ButtonStyled component='label' variant='contained' htmlFor='car-upload-image'>
                                         Subir nueva foto.
                                         <input

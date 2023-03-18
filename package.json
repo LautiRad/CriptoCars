@@ -22,6 +22,7 @@
     "ethers": "^5",
     "firebase": "^9.17.1",
     "formik": "^2.2.9",
+    "react-responsive-carousel": "^3.2.23",
     "lodash.merge": "^4.6.2",
     "mongodb": "^5.1.0",
     "next": "12.2.3",
