@@ -21,12 +21,15 @@ import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
 import Button from "@mui/material/Button";
 import LoadingSpinner from "../../components/Loading/LoadingSpinner";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 export default function ProductDetails({ vehicle }) {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [carousel, setCarousel] = useState([]);
 
   useEffect(() => {
     if(id==undefined)
@@ -34,10 +37,36 @@ export default function ProductDetails({ vehicle }) {
     setIsLoading(true);
     fetch(`/api/v1/products/${id}`)
       .then((response) => response.json())
-      .then((data) => setData(data.vehicle))
-      .then(() => setIsLoading(false))
+      .then((data) => loadData(data))
       .catch((error) => console.error(error));
   }, [id]);
+
+  const loadData = (data) => {
+    setData(data.vehicle);
+    carousel = [];
+    const images = [];
+    if(Array.isArray(data.vehicle.image)){
+      images = data.vehicle.image;
+    }else {
+      images.push(data.vehicle.image);
+    }
+    images.forEach((image, index) => {
+      carousel.push(
+          <Image
+              src={image}
+              alt="Autito"
+              width="100%"
+              height="60%"
+              layout="responsive"
+              objectFit="cover"
+              style={{ borderRadius: "10px" }}
+          />
+      );
+    });
+    setCarousel(carousel)
+    setIsLoading(false)
+  }
+
 
   const theme = createTheme({
     palette: {
@@ -63,15 +92,10 @@ export default function ProductDetails({ vehicle }) {
         {data && (
           <Grid container spacing={2} p={4}>
             <Grid item sm={12} md={7}>
-              <Image
-                src={data.image}
-                alt="Autito"
-                width="100%"
-                height="60%"
-                layout="responsive"
-                objectFit="cover"
-                style={{ borderRadius: "10px" }}
-              />
+              <Carousel showStatus={false}  showThumbs={false} infiniteLoop={true}>
+                {carousel}
+              </Carousel>
+
             </Grid>
             <Grid item sm={12} md={5}>
               <div className={styles.containerC}>

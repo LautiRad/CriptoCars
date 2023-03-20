@@ -18,6 +18,12 @@ function ProductCard({
   model,
   ubication,
 }) {
+  let image_card;
+  if(Array.isArray(image)){
+    image_card = image[0];
+  }else{
+    image_card = image;
+  }
   const theme = createTheme({
     palette: {
       type: "light",
@@ -37,7 +43,7 @@ function ProductCard({
           <div className={styles.containerC}>
             <div className={styles.imagewrapperC}>
               <Image
-                src={image}
+                src={image_card}
                 alt="Autito"
                 width="100%"
                 height="80%"

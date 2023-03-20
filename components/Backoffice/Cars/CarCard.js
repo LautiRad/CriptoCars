@@ -21,6 +21,12 @@ const StyledProductImg = styled('img')({
 
 export default function CarCard({ product }) {
   const { name, image, price, description, status, model, visibility , _id} = product;
+  let image_card;
+  if(Array.isArray(image)){
+    image_card = image[0];
+  }else{
+    image_card = image;
+  }
 
   const [checked, setData] = useState(visibility);
 
@@ -49,7 +55,7 @@ export default function CarCard({ product }) {
               {status}
             </Label>
           )}
-          <StyledProductImg alt={name} src={image} />
+          <StyledProductImg alt={name} src={image_card} />
         </Box>
 
         <Stack spacing={1} sx={{ p: 3 }}>

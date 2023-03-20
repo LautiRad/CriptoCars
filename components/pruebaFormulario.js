@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import _map from 'lodash/map'
 
 const style = {
   position: 'absolute',
@@ -54,7 +55,7 @@ export default function Formulario({ address }) {
     price: "",
     ubication: "",
     email: "",
-    image: "",
+    images: [],
     message: "",
     status: "Draft",
     wallet: "",
@@ -117,14 +118,15 @@ export default function Formulario({ address }) {
       valueFromMap(map.get("KILOMETERS"), "value") +
       valueFromMap(map.get("DOORS"), "value") +
       valueFromMap(map.get("DOORS"), "name");
-    initialValues.image = response.data.pictures[0].url;
-    initialValues.attributes = JSON.stringify(Object.fromEntries(map));
+    response.data.pictures.forEach(function(image, i) {
+      initialValues.images.push(image.url)
+    })
 
+    initialValues.attributes = JSON.stringify(Object.fromEntries(map));
     setLoad(true);
 
     myRef.current.scrollIntoView()
   };
-
   const manualLoad = async () => {
     setLoad(true);
     myRef.current.scrollIntoView()
@@ -183,11 +185,11 @@ export default function Formulario({ address }) {
 
   const handleSubmit = async (value) => {
     try {
-      let result;
-      if (initialValues.image === "") {
-        result = await uploadFile(file);
+      let result = [];
+      if (initialValues.images.length == 0) {
+        result.push(await uploadFile(file));
       } else {
-        result = initialValues.image;
+        result = initialValues.images;
       }
 
       console.log(result);
@@ -360,16 +362,23 @@ export default function Formulario({ address }) {
                     )}
                   />
                 </div>
-                {initialValues.image != "" && (
+
+                {initialValues.images.length != 0 && (
                   <div>
-                    <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <ImgStyled src={initialValues.image} alt="Car Pic" />
-                      </Box>
+                    <label htmlFor="image">Imagenes: </label>
+                    <Grid container>
+                    {_map(initialValues.images, image => (
+                      <Grid item xs={3} sx={{marginBottom: 3}}>
+                        <Box sx={{display: "flex", alignItems: "center"}}>
+                          <ImgStyled src={image} alt="Car Pic"/>
+                        </Box>
+                      </Grid>
+                    ))}
                     </Grid>
                   </div>
                 )}
-                {initialValues.image == "" && (
+
+                {initialValues.images.length == 0 && (
                   <div>
                     <label htmlFor="image">Imagen: </label>
                     <input
