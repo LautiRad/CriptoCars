@@ -165,7 +165,7 @@ const CarDetail = () => {
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                 {/*{data.image != null && (<ImgStyled src={imgSrc} alt='Car Pic' />)}*/}
                                 <Grid item sm={12} md={7}>
-                                  <Carousel showStatus={false}  showThumbs={false}>
+                                  <Carousel showStatus={false}  showThumbs={false} infiniteLoop={true}>
                                     {carousel}
                                   </Carousel>
                                 </Grid>

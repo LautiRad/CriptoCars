@@ -92,7 +92,7 @@ export default function ProductDetails({ vehicle }) {
         {data && (
           <Grid container spacing={2} p={4}>
             <Grid item sm={12} md={7}>
-              <Carousel showStatus={false}  showThumbs={false}>
+              <Carousel showStatus={false}  showThumbs={false} infiniteLoop={true}>
                 {carousel}
               </Carousel>
 
