@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import AppBarCC from "../components/ResponsiveAppBar/AppBarCC";
 import Toolbar from "../components/Toolbar/Toolbar";
 import ProductCard from "../components/Articles/ProductCard";
@@ -48,23 +48,25 @@ export default function Products() {
         </Head>
         <AppBarCC />
         <Toolbar />
-        <div>
+          {/* <Container> */}
+        <div className={styles.ProductsAll}>
           {isLoading ? (
             <LoadingSpinner />
           ) : (
-            <div className={styles.ProductsAll}>
-              {/* <ProductCard /> */}
-              <Grid container spacing={2}>
-                {data &&
-                  data
-                    .filter((element) => element.visibility)
-                    .map((element) => {
-                      return <ProductCard key={element.id} {...element} />;
-                    })}
-              </Grid>
-            </div>
+              <div>
+                {/* <ProductCard /> */}
+                <Grid container spacing={5}>
+                  {data &&
+                    data
+                      .filter((element) => element.visibility)
+                      .map((element) => {
+                        return <ProductCard key={element.id} {...element} />;
+                      })}
+                </Grid>
+              </div>
           )}
         </div>
+          {/* </Container> */}
         <aside>
           <HowOperate />
           <GeneralFooter />
