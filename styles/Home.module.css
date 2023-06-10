@@ -202,8 +202,13 @@
 
 .ProductsAll {
   text-align: center;
-  margin: 30px;
-  width: 100%;
+  margin: 2rem auto ;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 3.2rem;
+
 }
 
 .HowOperateGrid { 
