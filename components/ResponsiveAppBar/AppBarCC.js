@@ -51,6 +51,9 @@ const AppBarCC = () => {
     location.href = url;
   };
 
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
@@ -176,7 +179,7 @@ const AppBarCC = () => {
                 <Typography
                   variant="span"
                   textAlign="center"
-                  onClick={() => redirect("/")}
+                  onClick={() => redirect(`/user/favorites/${id}`)}
                   fontSize="14px"
                   sx={{
                     cursor: "pointer",
@@ -191,7 +194,7 @@ const AppBarCC = () => {
                 </Typography>
                 <Typography
                   textAlign="center"
-                  onClick={() => redirect("/")}
+                  onClick={() => redirect(`/user/${id}`)}
                   fontSize="14px"
                   sx={{
                     cursor: "pointer",
