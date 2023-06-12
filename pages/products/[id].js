@@ -168,7 +168,7 @@ export default function ProductDetails({ vehicle }) {
                   </div>
                   <div className={styles.contactC}>
                     <p className={styles.descriptiontextC}>
-                      Pago po SMART CONTRACTS:
+                      Pago por SMART CONTRACTS:
                     </p>
                     <p className={styles.descriptiontextC}>
                       Recomendamos que utilices los contratos inteligentes de

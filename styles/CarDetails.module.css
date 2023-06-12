@@ -181,6 +181,21 @@
     width:100%;
     margin-top:40px;
   }
+  
+  .telegramC:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+  .gmailC:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+
+  .paydece:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
 
   .paydece{
     margin-top:10px;
