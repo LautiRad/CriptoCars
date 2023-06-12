@@ -21,7 +21,7 @@ import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
 import Button from "@mui/material/Button";
 import LoadingSpinner from "../../components/Loading/LoadingSpinner";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 export default function ProductDetails({ vehicle }) {
@@ -32,8 +32,7 @@ export default function ProductDetails({ vehicle }) {
   const [carousel, setCarousel] = useState([]);
 
   useEffect(() => {
-    if(id==undefined)
-      return
+    if (id == undefined) return;
     setIsLoading(true);
     fetch(`/api/v1/products/${id}`)
       .then((response) => response.json())
@@ -45,28 +44,27 @@ export default function ProductDetails({ vehicle }) {
     setData(data.vehicle);
     carousel = [];
     const images = [];
-    if(Array.isArray(data.vehicle.image)){
+    if (Array.isArray(data.vehicle.image)) {
       images = data.vehicle.image;
-    }else {
+    } else {
       images.push(data.vehicle.image);
     }
     images.forEach((image, index) => {
       carousel.push(
-          <Image
-              src={image}
-              alt="Autito"
-              width="100%"
-              height="60%"
-              layout="responsive"
-              objectFit="cover"
-              style={{ borderRadius: "10px" }}
-          />
+        <Image
+          src={image}
+          alt="Autito"
+          width="100%"
+          height="60%"
+          layout="responsive"
+          objectFit="cover"
+          style={{ borderRadius: "10px" }}
+        />
       );
     });
-    setCarousel(carousel)
-    setIsLoading(false)
-  }
-
+    setCarousel(carousel);
+    setIsLoading(false);
+  };
 
   const theme = createTheme({
     palette: {
@@ -92,10 +90,13 @@ export default function ProductDetails({ vehicle }) {
         {data && (
           <Grid container spacing={2} p={4}>
             <Grid item sm={12} md={7}>
-              <Carousel showStatus={false}  showThumbs={false} infiniteLoop={true}>
+              <Carousel
+                showStatus={false}
+                showThumbs={false}
+                infiniteLoop={true}
+              >
                 {carousel}
               </Carousel>
-
             </Grid>
             <Grid item sm={12} md={5}>
               <div className={styles.containerC}>
@@ -148,17 +149,32 @@ export default function ProductDetails({ vehicle }) {
                     <p className={styles.priceamountC}>{data.price}</p>
                   </div>
                   <div className={styles.contactC}>
-                    <p className={styles.descriptiontextC}>CONTACTO</p>
+                    <p className={styles.descriptiontextC}>
+                      Contacto del Vendedor
+                    </p>
                     <div className={styles.contactIcons}>
-                      {/* <div className={styles.gmailC}>
-                  <Image
-                    className={styles.iconGmail}
-                    src={iconGmail}
-                    alt="icon gmail"
-                    width="50%"
-                    height="50%"
-                  />
-                </div> */}
+                      <Link href={`mailto:${data.email}`}>
+                        <div className={styles.gmailC}>
+                          <Image
+                            // className={styles.iconGmail}
+                            src={iconGmail}
+                            alt="icon gmail"
+                            width="50%"
+                            height="50%"
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className={styles.contactC}>
+                    <p className={styles.descriptiontextC}>
+                      Pago po SMART CONTRACTS:
+                    </p>
+                    <p className={styles.descriptiontextC}>
+                      Recomendamos que utilices los contratos inteligentes de
+                      Paydece para realizar tu transacción de forma segura. Si
+                      tenes alguna duda de como realizar la transaccion podes
+                      consultar en el siguiente grupo de telegram.
                       <Link href="https://t.me/paydece">
                         <div className={styles.telegramC}>
                           <Image
@@ -170,18 +186,13 @@ export default function ProductDetails({ vehicle }) {
                           />
                         </div>
                       </Link>
-                    </div>
-                  </div>
-                  <div className={styles.contactC}>
-                    <p className={styles.descriptiontextC}>
-                      PAGO POR SMART CONTRACTS
                     </p>
                     <Link href="https://app.paydece.io">
                       <div className={styles.paydece}>
                         <Image
                           src={iconPaydece}
                           alt="icon gmail"
-                          width="250%"
+                          width="200%"
                           height="80%"
                         />
                       </div>
@@ -191,15 +202,18 @@ export default function ProductDetails({ vehicle }) {
               </div>
             </Grid>
             {data.attributes && (
-              <Grid container sx={{paddingLeft: "16px"}}>
-                <ProductProperties properties={data} ></ProductProperties>
+              <Grid container sx={{ paddingLeft: "16px" }}>
+                <ProductProperties properties={data}></ProductProperties>
                 <ProductTab properties={data}></ProductTab>
               </Grid>
             )}
-
           </Grid>
         )}
-        {isLoading && <div><LoadingSpinner /></div>}
+        {isLoading && (
+          <div>
+            <LoadingSpinner />
+          </div>
+        )}
 
         <aside>
           <HowOperate />

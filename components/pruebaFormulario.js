@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
@@ -10,30 +10,48 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import _map from 'lodash/map'
+import _map from "lodash/map";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 350,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  borderRadius: '10px',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "10px",
   boxShadow: 24,
   p: 3,
 };
 
 export default function Formulario({ address }) {
-  const myRef = useRef(null)
+  const myRef = useRef(null);
 
   const [formSend, setFormSend] = useState(false);
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [load, setLoad] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [imageCount, setImageCount] = useState(0);
+
+  const handleFileChange = (event) => {
+    const selectedFiles = event.currentTarget.files;
+    const newFiles = Array.from(selectedFiles);
+    const totalFiles = [...files, ...newFiles].slice(0, 5); // Limita la cantidad de archivos a 5
+    setFiles(totalFiles);
+    setImageCount(totalFiles.length);
+  };
+
+  <input
+    type="file"
+    id="images"
+    name="images"
+    accept="image/*"
+    multiple
+    onChange={handleFileChange}
+  />;
 
   const ImgStyled = styled("img")(({ theme }) => ({
     width: "50%",
@@ -100,7 +118,9 @@ export default function Formulario({ address }) {
       valueFromMap(map.get("BRAND"), "value") +
       " " +
       valueFromMap(map.get("MODEL"), "value");
-    initialValues.model = Number(valueFromMap(map.get("VEHICLE_YEAR"), "value"));
+    initialValues.model = Number(
+      valueFromMap(map.get("VEHICLE_YEAR"), "value")
+    );
     initialValues.km =
       map.get("KILOMETERS") === undefined
         ? ""
@@ -118,18 +138,24 @@ export default function Formulario({ address }) {
       valueFromMap(map.get("KILOMETERS"), "value") +
       valueFromMap(map.get("DOORS"), "value") +
       valueFromMap(map.get("DOORS"), "name");
-    response.data.pictures.forEach(function(image, i) {
-      initialValues.images.push(image.url)
-    })
+    response.data.pictures.slice(0, 5).forEach(function (image, i) {
+      initialValues.images.push(image.url);
+    });
 
     initialValues.attributes = JSON.stringify(Object.fromEntries(map));
     setLoad(true);
 
-    myRef.current.scrollIntoView()
+    myRef.current.scrollIntoView();
   };
   const manualLoad = async () => {
+    if (initialValues.images.length + imageCount >= 5) {
+      // Si el número total de imágenes supera 5, muestra un mensaje de error
+      alert("Se permite un máximo de 5 imágenes");
+      return;
+    }
+
     setLoad(true);
-    myRef.current.scrollIntoView()
+    myRef.current.scrollIntoView();
   };
 
   const validate = (value) => {
@@ -174,40 +200,56 @@ export default function Formulario({ address }) {
       errors.email =
         "El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.";
     }
+    if (value.images && value.images.length > 5) {
+      errors.images = "Solo se permiten un máximo de 5 imágenes";
+    }
     return errors;
   };
 
   const handleClick = (isSubmitting, errors) => {
-    if(isSubmitting && Object.keys(errors).length != 0){
+    if (isSubmitting && Object.keys(errors).length != 0) {
       handleOpen();
     }
-  }
+  };
 
-  const handleSubmit = async (value) => {
+  const handleSubmit = async (values) => {
     try {
       let result = [];
-      if (initialValues.images.length == 0) {
-        result.push(await uploadFile(file));
+
+      if (initialValues.images.length === 0) {
+        const fileCount = files.length;
+        const maxFiles = 5; // Número máximo de imágenes permitidas
+
+        // Verificar si se excede el límite de carga de imágenes
+        if (fileCount > maxFiles) {
+          throw new Error(
+            `Por favor, selecciona un máximo de ${maxFiles} imágenes.`
+          );
+        }
+
+        for (let i = 0; i < fileCount; i++) {
+          result.push(await uploadFile(files[i]));
+        }
       } else {
         result = initialValues.images;
       }
 
-      console.log(result);
       const dataPost = {
-        name: value.name,
-        description: value.description,
-        model: value.model,
-        km: value.km,
-        price: value.price,
-        ubication: value.ubication,
-        email: value.email,
-        message: value.message,
+        name: values.name,
+        description: values.description,
+        model: values.model,
+        km: values.km,
+        price: values.price,
+        ubication: values.ubication,
+        email: values.email,
+        message: values.message,
         image: result,
         status: "Draft",
         visibility: false,
         attributes: initialValues.attributes,
         wallet: address,
       };
+
       const response = await axios.post("/api/v1/products", dataPost);
       setFormSend(true);
       setTimeout(() => setFormSend(false), 5000);
@@ -260,7 +302,7 @@ export default function Formulario({ address }) {
             onSubmit={handleSubmit}
             enableReinitialize
           >
-            {({ errors, handleSubmit, isSubmitting  }) => (
+            {({ errors, handleSubmit, isSubmitting }) => (
               <form onSubmit={handleSubmit} className={styles.formulario}>
                 <div>
                   <label htmlFor="name">Marca y Modelo:</label>
@@ -363,33 +405,37 @@ export default function Formulario({ address }) {
                   />
                 </div>
 
-                {initialValues.images.length != 0 && (
+                {initialValues.images.length !== 0 && (
                   <div>
-                    <label htmlFor="image">Imagenes: </label>
+                    <label htmlFor="images">Imágenes: </label>
                     <Grid container>
-                    {_map(initialValues.images, image => (
-                      <Grid item xs={3} sx={{marginBottom: 3}}>
-                        <Box sx={{display: "flex", alignItems: "center"}}>
-                          <ImgStyled src={image} alt="Car Pic"/>
-                        </Box>
-                      </Grid>
-                    ))}
+                      {_map(initialValues.images, (image) => (
+                        <Grid item xs={3} sx={{ marginBottom: 3 }}>
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <ImgStyled src={image} alt="Car Pic" />
+                          </Box>
+                        </Grid>
+                      ))}
                     </Grid>
                   </div>
                 )}
 
-                {initialValues.images.length == 0 && (
+                {initialValues.images.length === 0 && (
                   <div>
-                    <label htmlFor="image">Imagen: </label>
+                    <label htmlFor="images">
+                      Imágenes: (máximo 5 imágenes)
+                    </label>
                     <input
                       type="file"
-                      id="image"
-                      name="image"
+                      id="images"
+                      name="images"
                       accept="image/*"
-                      onChange={(value) => setFile(value.currentTarget.files[0])}
+                      multiple
+                      onChange={(event) => setFiles(event.currentTarget.files)}
                     />
                   </div>
                 )}
+
                 <div>
                   <Field
                     name="message"
@@ -407,7 +453,12 @@ export default function Formulario({ address }) {
                     placeholder=""
                   />
                 </div>
-                <button onClick={handleClick(isSubmitting, errors)} type="submit">Enviar</button>
+                <button
+                  onClick={handleClick(isSubmitting, errors)}
+                  type="submit"
+                >
+                  Enviar
+                </button>
                 {formSend && (
                   <p className={styles.exito}>Formulario enviado con exito!</p>
                 )}
@@ -417,18 +468,37 @@ export default function Formulario({ address }) {
         )}
       </div>
       <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Container>
-            <Typography id="modal-modal-title" variant="h6" component="h3" sx={{    textAlign: "center", fontFamily:"Montserrat", fontSize: "1.15rem"  }}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h3"
+              sx={{
+                textAlign: "center",
+                fontFamily: "Montserrat",
+                fontSize: "1.15rem",
+              }}
+            >
               Por favor, completá todos los datos solicitados.
             </Typography>
-            <br/>
-            <Button onClick={handleClose} variant='contained' className={styles.modalButton} sx={{ marginLeft: "33%", background: "#ed1848" ,fontWeight: "600", fontFamily: "Open Sans, sans-serif"}}>
+            <br />
+            <Button
+              onClick={handleClose}
+              variant="contained"
+              className={styles.modalButton}
+              sx={{
+                marginLeft: "33%",
+                background: "#ed1848",
+                fontWeight: "600",
+                fontFamily: "Open Sans, sans-serif",
+              }}
+            >
               ACEPTAR
             </Button>
           </Container>
