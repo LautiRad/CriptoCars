@@ -35,7 +35,7 @@ export default function CarPage({ address, allowedWallets }) {
       <Header />
       <Container sx={{ display: { xs: "block", md: "block" } }}>
         <Typography variant="h4" sx={{ mb: 5, mt: 5 }}>
-          Cars
+          Autos
         </Typography>
         <CarList />
       </Container>

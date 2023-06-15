@@ -114,13 +114,20 @@ const AppBarCC = () => {
                 ))}
               </Menu>
             </Box>
-            <Link href="/" rel="noopener noreferrer">
-              <Image
-                src={Logo}
-                alt="Logo"
-                sx={{ display: { xs: "none", md: "flex" } }}
-              />
-            </Link>
+            <Box
+              sx={{
+                display: { xs: "flex", md: "flex" },
+                margin: 2,
+              }}
+            >
+              <Link href="/">
+                <Image
+                  src={Logo}
+                  alt="Logo"
+                  sx={{ display: { xs: "none", md: "flex" } }}
+                />
+              </Link>
+            </Box>
             <Typography
               variant="h5"
               noWrap
@@ -139,6 +146,7 @@ const AppBarCC = () => {
             ></Typography>
             <Box
               sx={{
+                my: 2,
                 flexGrow: 1,
                 display: { xs: "none", md: "flex", paddingLeft: "3em" },
                 justifyContent: "end",
@@ -176,7 +184,7 @@ const AppBarCC = () => {
                   marginRight: "16px",
                 }}
               >
-                <Typography
+                {/* <Typography
                   variant="span"
                   textAlign="center"
                   onClick={() => redirect(`/user/favorites/${id}`)}
@@ -191,8 +199,8 @@ const AppBarCC = () => {
                   }}
                 >
                   <FavoriteBorderIcon sx={{ fontSize: "18px" }} />
-                </Typography>
-                <Typography
+                </Typography> */}
+                {/* <Typography
                   textAlign="center"
                   onClick={() => redirect(`/user/${id}`)}
                   fontSize="14px"
@@ -206,7 +214,7 @@ const AppBarCC = () => {
                   }}
                 >
                   <PermIdentityIcon sx={{ fontSize: "18px" }} />
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
             <Rainbow />

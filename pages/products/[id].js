@@ -150,7 +150,10 @@ export default function ProductDetails({ vehicle }) {
                   </div>
                   <div className={styles.contactC}>
                     <p className={styles.descriptiontextC}>
-                      Contacto del Vendedor
+                      Contacto del Vendedor:
+                    </p>
+                    <p className={styles.descriptiontextC}>
+                      Contactá al Vendedor y sacate todas tus dudas.
                     </p>
                     <div className={styles.contactIcons}>
                       <Link href={`mailto:${data.email}`}>
