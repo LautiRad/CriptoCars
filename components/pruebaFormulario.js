@@ -73,6 +73,7 @@ export default function Formulario({ address }) {
     price: "",
     ubication: "",
     email: "",
+    whatsapp: "",
     images: [],
     message: "",
     status: "Draft",
@@ -200,6 +201,11 @@ export default function Formulario({ address }) {
       errors.email =
         "El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.";
     }
+    if (!value.whatsapp) {
+      errors.whatsapp = "Por favor ingresa tu número de WhatsApp";
+    } else if (!/^\d+$/.test(value.whatsapp)) {
+      errors.whatsapp = "El número de WhatsApp solo puede contener dígitos";
+    }
     if (value.images && value.images.length > 5) {
       errors.images = "Solo se permiten un máximo de 5 imágenes";
     }
@@ -242,6 +248,7 @@ export default function Formulario({ address }) {
         price: values.price,
         ubication: values.ubication,
         email: values.email,
+        whatsapp: values.whatsapp,
         message: values.message,
         image: result,
         status: "Draft",
@@ -401,6 +408,21 @@ export default function Formulario({ address }) {
                     name="email"
                     component={() => (
                       <div className={styles.error}>{errors.email}</div>
+                    )}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="whatsapp">WhatsApp:</label>
+                  <Field
+                    type="text"
+                    id="whatsapp"
+                    name="whatsapp"
+                    placeholder="Ingresa tu número de WhatsApp"
+                  />
+                  <ErrorMessage
+                    name="whatsapp"
+                    component={() => (
+                      <div className={styles.error}>{errors.whatsapp}</div>
                     )}
                   />
                 </div>

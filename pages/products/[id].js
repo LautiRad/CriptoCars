@@ -17,6 +17,8 @@ import iconTool from "../../assets/svgs/iconTool.svg";
 import Heart from "../../assets/svgs/heart.svg";
 import MapMaker from "../../assets/svgs/map-marker.svg";
 import iconGmail from "../../assets/svgs/gmail.svg";
+import iconWpp from "../../public/images/whatsappVerde.png";
+
 import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
 import Button from "@mui/material/Button";
@@ -161,6 +163,21 @@ export default function ProductDetails({ vehicle }) {
                           <Image
                             // className={styles.iconGmail}
                             src={iconGmail}
+                            alt="icon gmail"
+                            width="50%"
+                            height="50%"
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                    <div className={styles.contactIcons}>
+                      <Link
+                        href={`https://api.whatsapp.com/send?phone=${data.whatsapp}&text=Hola+me+interesa+el${data.name}`}
+                      >
+                        <div className={styles.gmailC}>
+                          <Image
+                            // className={styles.iconGmail}
+                            src={iconWpp}
                             alt="icon gmail"
                             width="50%"
                             height="50%"
