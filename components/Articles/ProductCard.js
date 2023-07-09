@@ -6,6 +6,7 @@ import styles from "../../styles/ProductCard.module.css";
 import iconUSDT from "../../public/images/iconUSDT.svg";
 import iconTool from "../../assets/svgs/iconTool.svg";
 import Heart from "../../assets/svgs/heart.svg";
+import HeartFavorite from "../../assets/svgs/heartFavorite.svg";
 import MapMaker from "../../assets/svgs/map-marker.svg";
 
 function ProductCard({
@@ -17,11 +18,12 @@ function ProductCard({
   _id,
   model,
   ubication,
+  favorite
 }) {
   let image_card;
-  if(Array.isArray(image)){
+  if (Array.isArray(image)) {
     image_card = image[0];
-  }else{
+  } else {
     image_card = image;
   }
   const theme = createTheme({
@@ -63,7 +65,19 @@ function ProductCard({
                     <p>{name}</p>
                   </div>
                 </div>
-                <Image className={styles.iconC} src={Heart} alt="icon heart" />
+                {favorite ? (
+                  <Image
+                    className={styles.iconC}
+                    src={HeartFavorite}
+                    alt="icon heartFavorite"
+                  />
+                ) : (
+                  <Image
+                    className={styles.iconC}
+                    src={Heart}
+                    alt="icon heart"
+                  />
+                )}
               </div>
               <div className={styles.descriptionC}>
                 <p className={styles.descriptiontextC}>
