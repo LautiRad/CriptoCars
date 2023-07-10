@@ -21,6 +21,7 @@ import iconWpp from "../../public/images/whatsappVerde.png";
 
 import iconTelegram from "../../assets/svgs/telegram.svg";
 import iconPaydece from "../../assets/svgs/paydece.svg";
+import HeartFavorite from "../../assets/svgs/heartFavorite.svg";
 import Button from "@mui/material/Button";
 import LoadingSpinner from "../../components/Loading/LoadingSpinner";
 import { Carousel } from "react-responsive-carousel";
@@ -30,6 +31,7 @@ export default function ProductDetails({ vehicle }) {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [carousel, setCarousel] = useState([]);
 
@@ -41,7 +43,6 @@ export default function ProductDetails({ vehicle }) {
       .then((data) => loadData(data))
       .catch((error) => console.error(error));
   }, [id]);
-
   const loadData = (data) => {
     setData(data.vehicle);
     carousel = [];
@@ -65,8 +66,30 @@ export default function ProductDetails({ vehicle }) {
       );
     });
     setCarousel(carousel);
-    setIsLoading(false);
+
+    fetch(`/api/v1/favorite/${id}`)
+      .then((response) => response.json())
+      .then((data) => loadFavorite(data))
+      .catch((error) => console.error(error));
+    const loadFavorite = (data) => {
+      if (data.favorite != null) {
+        setIsFavorite(true)
+      }
+      setIsLoading(false);
+    }
   };
+
+  const handleFavorite = async () => {
+    setIsFavorite(!isFavorite)
+    if (isFavorite) {
+      const response = await axios.delete(`/api/v1/favorite/${id}`);
+    } else {
+      const data = {
+        id: id
+      }
+      const response = await axios.post("/api/v1/favorite", data);
+    }
+  }
 
   const theme = createTheme({
     palette: {
@@ -89,7 +112,7 @@ export default function ProductDetails({ vehicle }) {
           <link rel="icon" href="/icon.png" />
         </Head>
         <AppBarCC />
-        {data && (
+        {data && !isLoading && (
           <Grid container spacing={2} p={4}>
             <Grid item sm={12} md={7}>
               <Carousel
@@ -114,11 +137,21 @@ export default function ProductDetails({ vehicle }) {
                         <p>{data.name}</p>
                       </div>
                     </div>
-                    <Image
-                      className={styles.iconC}
-                      src={Heart}
-                      alt="icon heart"
-                    />
+                    {isFavorite ? (
+                      <Image
+                        className={styles.iconC}
+                        src={HeartFavorite}
+                        alt="icon heartFavorite"
+                        onClick={handleFavorite}
+                      />
+                    ) : (
+                      <Image
+                        className={styles.iconC}
+                        src={Heart}
+                        alt="icon heart"
+                        onClick={handleFavorite}
+                      />
+                    )}
                   </div>
                   <div className={styles.descriptionC}>
                     <p className={styles.descriptiontextC}>

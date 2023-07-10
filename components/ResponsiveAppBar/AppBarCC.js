@@ -32,6 +32,7 @@ const theme = createTheme({
 
 const pages = [
   { name: "Vehículos", url: "/" },
+  { name: "Favoritos", url: "/user/favorites" },
   { name: "Vender", url: "/sell" },
   { name: "Ayuda", url: "/#faQ" },
 ];
