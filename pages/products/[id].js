@@ -84,10 +84,7 @@ export default function ProductDetails({ vehicle }) {
     if (isFavorite) {
       const response = await axios.delete(`/api/v1/favorite/${id}`);
     } else {
-      const data = {
-        id: id
-      }
-      const response = await axios.post("/api/v1/favorite", data);
+      const response = await axios.put(`/api/v1/favorite/${id}`);
     }
   }
 
