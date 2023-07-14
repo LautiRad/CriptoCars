@@ -27,7 +27,7 @@ handler.get(async (req, res) => {
   }
 });
 
-// DELETE /api/v1/products/:id
+// DELETE /api/v1/favorite/:id
 handler.delete(async (req, res) => {
   const session = await getSession({ req })
   if (session) {
@@ -40,6 +40,32 @@ handler.delete(async (req, res) => {
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Error al eliminar el producto." });
+    }
+  } else {
+    res.status(401).json({ error: 'No se ha iniciado sesión' })
+  }
+});
+
+
+// POST /api/v1/favorite/:id
+handler.put(async (req, res) => {
+  const session = await getSession({ req })
+
+  if (session) {
+    const address = session.address
+    try {
+      const { db } = await connectToDatabase();
+      const { id } = req.query;
+
+      console.log(req.body);
+      const result = await db.collection("favorite").insertOne({
+        id,
+        address
+      });
+      res.status(200).json({ result });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error al guardar el vehiculo." });
     }
   } else {
     res.status(401).json({ error: 'No se ha iniciado sesión' })
